@@ -21,28 +21,28 @@
           GitHub
         </a>
       </div>
-      <button v-on:click="writeToRealtimeDb()">Haz me click</button>
+      <button @click="writeToRealtimeDb()">Haz me click</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  methods:{
+  methods: {
     async writeToRealtimeDb() {
-  const messageRef = this.$fire.database.ref('message')
-  try {
-    await messageRef.set({
-      message: 'Nuxt-Fire with Firebase Realtime Database rocks!'
-    })
-  } catch (e) {
-    alert(e)
-    return
-  }
-  alert('Success.')
-}
-  }
-}
+      const messageRef = this.$fire.database.ref('message');
+      try {
+        await messageRef.set({
+          message: 'Nuxt-Fire with Firebase Realtime Database rocks!',
+        });
+      } catch (e) {
+        alert(e);
+        return;
+      }
+      alert('Success.');
+    },
+  },
+};
 </script>
 
 <style>
@@ -52,33 +52,21 @@ export default {
 }
 */
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  @apply my-0 mx-auto min-h-screen flex justify-center items-center text-center;
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
+  @apply text-black font-roboto block font-normal;
   font-size: 100px;
-  color: #35495e;
   letter-spacing: 1px;
 }
 
 .subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
+  @apply font-normal text-4xl text-black pb-4;
   word-spacing: 5px;
-  padding-bottom: 15px;
 }
 
 .links {
-  padding-top: 15px;
+  @apply pt-4;
 }
 </style>
