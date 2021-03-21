@@ -1,4 +1,5 @@
-require('dotenv').config()
+require('dotenv').config();
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -7,14 +8,34 @@ export default {
   head: {
     title: 'TFG-Recetas',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'es',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: 'favicon.ico',
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap',
+      },
+      {
+        rel: 'stylesheet',
+        href:
+          'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap',
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -46,7 +67,7 @@ export default {
           storageBucket: process.env.STOREAGE_BUCKET,
           messagingSenderId: process.env.MESSAGING_SENDER_ID,
           appId: process.env.APP_ID,
-          measurementId: process.env.MEASUREMENT_ID
+          measurementId: process.env.MEASUREMENT_ID,
         },
         services: {
           auth: true,
@@ -57,12 +78,12 @@ export default {
           messaging: true,
           performance: true,
           analytics: true,
-          remoteConfig: true
-        }
-      }
-    ]
+          remoteConfig: true,
+        },
+      },
+    ],
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
-}
+};
