@@ -18,7 +18,7 @@ module.exports = {
       roboto: ['Roboto', ...fontFamily.mono],
       poppins: ['Poppins', ...fontFamily.sans],
     },
-    color: {
+    colors: {
       primary: '#6D2A2A',
 
       white: '#FFFFFF',
