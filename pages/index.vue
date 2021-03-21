@@ -21,14 +21,25 @@
           GitHub
         </a>
       </div>
-      <button @click="writeToRealtimeDb()">Haz me click</button>
+      <Button class="my-4" primary @click="consoleLog('Primary')">
+        Regístrate
+      </Button>
+      <Button class="my-4" secondary @click="consoleLog('Secondary')">
+        Iniciar Sesión
+      </Button>
     </div>
   </div>
 </template>
 
 <script>
+  import Button from '@/components/Button';
+
   export default {
+    components: { Button },
     methods: {
+      consoleLog(message) {
+        console.log(message);
+      },
       async writeToRealtimeDb() {
         const messageRef = this.$fire.database.ref('message');
         try {
