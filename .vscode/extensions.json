@@ -1,7 +1,7 @@
 {
-    "recommendations": [
-		"octref.vetur",
-        "bradlc.vscode-tailwindcss",
-        "heybourn.headwind"
-	]
+  "recommendations": [
+    "octref.vetur",
+    "bradlc.vscode-tailwindcss",
+    "heybourn.headwind"
+  ]
 }

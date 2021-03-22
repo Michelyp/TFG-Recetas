@@ -1,8 +1,5 @@
 <template>
-  <button
-    :class="{ primary, secondary }"
-    @click.prevent="$emit('click')"
-  >
+  <button :class="{ primary, secondary }" @click.prevent="$emit('click')">
     <slot />
   </button>
 </template>

@@ -7,8 +7,10 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "lint": "eslint ./**/*.{js,vue}",
-    "lint:fix": "eslint --fix --ext .js,.vue .",
+    "pretest": "npm run lint",
+    "prelint": "npm run format",
+    "lint": "eslint --fix --ext .js,.vue .",
+    "format": "prettier --write ./**/*.{js,json,vue}",
     "test": "jest"
   },
   "dependencies": {
