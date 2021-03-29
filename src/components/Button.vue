@@ -13,7 +13,7 @@
   };
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
   button {
     @apply py-4 px-16 text-2xl rounded;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
