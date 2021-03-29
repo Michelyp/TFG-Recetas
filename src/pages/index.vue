@@ -1,30 +1,11 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title">TFG-Recetas</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-      <Button class="my-4" primary @click="consoleLog('Primary')">
+    
+      <Button class="my-4" primary>
         Regístrate
       </Button>
-      <Button class="my-4" secondary @click="consoleLog('Secondary')">
+      <Button class="my-4" secondary>
         Iniciar Sesión
       </Button>
     </div>
