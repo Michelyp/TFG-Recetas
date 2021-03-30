@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div>
-    
+      <Steper />
       <Button class="my-4" primary>
         Regístrate
       </Button>
@@ -14,9 +14,13 @@
 
 <script>
   import Button from '@/components/Button';
+  import Steper from '@/components/Steper';
 
   export default {
-    components: { Button },
+    components: { 
+      Button,
+      Steper 
+    },
     methods: {
       consoleLog(message) {
         console.log(message);
