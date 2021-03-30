@@ -13,47 +13,30 @@
 </template>
 
 <script>
-  import Button from '@/components/Button';
-  import Steper from '@/components/Steper';
+import Button from '@/components/Button'
+import Steper from '@/components/Steper'
 
-  export default {
-    components: { 
-      Button,
-      Steper 
-    },
-    methods: {
-      consoleLog(message) {
-        console.log(message);
-      },
-      async writeToRealtimeDb() {
-        const messageRef = this.$fire.database.ref('message');
-        try {
-          await messageRef.set({
-            message: 'Nuxt-Fire with Firebase Realtime Database rocks!',
-          });
-        } catch (e) {
-          alert(e);
-          return;
-        }
-        alert('Success.');
-      },
-    },
-  };
+export default {
+  components: {
+    Button,
+    Steper
+  }
+}
 </script>
 
-<style lang="postcss">
+<style scoped lang="postcss">
   .container {
-    @apply my-0 mx-auto min-h-screen flex justify-center items-center text-center;
+    @apply flex items-center justify-center min-h-screen mx-auto my-0 text-center;
   }
 
   .title {
-    @apply text-black font-roboto block font-normal;
+    @apply block font-normal text-black font-roboto;
     font-size: 100px;
     letter-spacing: 1px;
   }
 
   .subtitle {
-    @apply font-normal text-4xl text-black pb-4;
+    @apply pb-4 text-4xl font-normal text-black;
     word-spacing: 5px;
   }
 

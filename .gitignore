@@ -175,6 +175,9 @@ docs/_book
 # TODO: where does this rule come from?
 test/
 
+#ESlint
+.eslintcache
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db

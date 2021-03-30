@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-require('dotenv').config();
+require('dotenv').config()
 
 export default {
   srcDir: 'src',
@@ -8,34 +8,34 @@ export default {
   head: {
     title: 'TFG-Recetas',
     htmlAttrs: {
-      lang: 'es',
+      lang: 'es'
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: '' }
     ],
     link: [
       {
         rel: 'icon',
         type: 'image/x-icon',
-        href: 'favicon.ico',
+        href: 'favicon.ico'
       },
       {
         rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
+        href: 'https://fonts.gstatic.com'
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap',
+          'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap'
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap',
-      },
-    ],
+          'https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap'
+      }
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -68,7 +68,7 @@ export default {
           storageBucket: process.env.STOREAGE_BUCKET,
           messagingSenderId: process.env.MESSAGING_SENDER_ID,
           appId: process.env.APP_ID,
-          measurementId: process.env.MEASUREMENT_ID,
+          measurementId: process.env.MEASUREMENT_ID
         },
         services: {
           auth: true,
@@ -79,10 +79,10 @@ export default {
           messaging: true,
           performance: true,
           analytics: true,
-          remoteConfig: true,
-        },
-      },
-    ],
+          remoteConfig: true
+        }
+      }
+    ]
   ],
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -97,12 +97,12 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3,
-        },
-      },
-    },
+          success: colors.green.accent3
+        }
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
-};
+  build: {}
+}
