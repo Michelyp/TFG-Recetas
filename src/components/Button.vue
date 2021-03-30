@@ -1,5 +1,8 @@
 <template>
-  <button :class="{ customPrimary: primary, customSecondary: secondary }" @click.prevent="$emit('click')">
+  <button
+    :class="{ 'custom-primary': primary, 'custom-secondary': secondary }"
+    @click.prevent="$emit('click')"
+  >
     <slot />
   </button>
 </template>
@@ -15,7 +18,7 @@
 
 <style scoped lang="postcss">
   button {
-    @apply py-4 px-16 text-2xl rounded;
+    @apply px-24 py-4 text-lg rounded;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
@@ -27,11 +30,20 @@
     @apply outline-none;
   }
 
-  .customPrimary {
+  .custom-primary {
     @apply text-white bg-primary;
   }
 
-  .customSecondary {
-    @apply text-primary bg-white;
+  .custom-secondary {
+    @apply bg-white text-primary;
+  }
+
+  @supports (-webkit-text-stroke: 1px black) {
+    .custom-primary {
+      -webkit-text-stroke: 2px rgba(255, 253, 253, 0.5);
+    }
+    .custom-secondary {
+      -webkit-text-stroke: 2px rgba(109, 42, 42, 0.5);
+    }
   }
 </style>
