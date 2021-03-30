@@ -1,5 +1,5 @@
 <template>
-  <button :class="{ primary, secondary }" @click.prevent="$emit('click')">
+  <button :class="{ customPrimary: primary, customSecondary: secondary }" @click.prevent="$emit('click')">
     <slot />
   </button>
 </template>
@@ -27,11 +27,11 @@
     @apply outline-none;
   }
 
-  .primary {
+  .customPrimary {
     @apply text-white bg-primary;
   }
 
-  .secondary {
+  .customSecondary {
     @apply text-primary bg-white;
   }
 </style>
