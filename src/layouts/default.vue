@@ -1,14 +1,14 @@
 <template>
   <v-app dark>
     <Nuxt />
-  <Footer />
+    <Footer />
   </v-app>
 </template>
 
 <script>
-  import Footer from '@/components/Footer';
+import Footer from '@/components/Footer'
 
-  export default {
-    components: { Footer }
-  }
+export default {
+  components: { Footer }
+}
 </script>

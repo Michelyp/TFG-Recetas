@@ -8,12 +8,12 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      primary: Boolean,
-      secondary: Boolean,
-    },
-  };
+export default {
+  props: {
+    primary: Boolean,
+    secondary: Boolean
+  }
+}
 </script>
 
 <style scoped lang="postcss">
