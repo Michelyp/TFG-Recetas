@@ -40,7 +40,7 @@ export default {
 
   @supports (-webkit-text-stroke: 1px black) {
     .custom-primary {
-      -webkit-text-stroke: 2px rgba(255, 253, 253, 0.5);
+      -webkit-text-stroke: 1px rgba(255, 253, 253, 0.5);
     }
     .custom-secondary {
       -webkit-text-stroke: 2px rgba(109, 42, 42, 0.5);
