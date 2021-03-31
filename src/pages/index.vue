@@ -1,46 +1,61 @@
 <template>
-  <div class="container">
-    <div>
-      <Steper />
-      <Button class="my-4" primary>
-        Regístrate
-      </Button>
-      <Button class="my-4" secondary>
-        Iniciar Sesión
-      </Button>
+  <div class="custainer">
+    <div class="w-2/5">
+      <img src="/images/inicio.png">
+    </div>
+    <div class="rigth-column">
+      <div>
+        <img class="h-32 px-12" src="/images/yamyam.png">
+        <h2>
+          <strong> Crea y descubre nuevas recetas</strong>
+        </h2>
+        <p>
+          <strong>Únete a Yam Yam ahora mismo.</strong>
+        </p>
+        <div class="botones">
+          <Button class="my-4" primary>
+            Regístrate
+          </Button>
+          <Button class="my-4" secondary>
+            Iniciar Sesión
+          </Button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Button from '@/components/Button'
-import Steper from '@/components/Steper'
 
 export default {
   components: {
-    Button,
-    Steper
+    Button
   }
 }
 </script>
 
 <style scoped lang="postcss">
-  .container {
-    @apply flex items-center justify-center min-h-screen mx-auto my-0 text-center;
+  .custainer {
+    @apply flex flex-no-wrap w-screen min-h-screen mx-auto;
   }
 
-  .title {
-    @apply block font-normal text-black font-roboto;
-    font-size: 100px;
-    letter-spacing: 1px;
+  .rigth-column {
+    @apply grid w-3/5 place-items-center font-poppins;
   }
 
-  .subtitle {
-    @apply pb-4 text-4xl font-normal text-black;
-    word-spacing: 5px;
+  .botones {
+    @apply flex flex-col max-w-xs mx-auto;
   }
 
-  .links {
-    @apply pt-4;
+  h2 {
+    @apply px-12 text-6xl;
+    line-height: 1.2;
+    color: #370606;
+  }
+
+  p {
+    @apply px-12 pt-12 text-4xl;
+    color: #370606;
   }
 </style>

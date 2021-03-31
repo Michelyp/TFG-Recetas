@@ -1,8 +1,16 @@
 <template>
-  <footer>
-    <p>©2021 Yam Yam Designed by N & E</p>
-  </footer>
+  <v-footer padless>
+    <v-col class="text-center" cols="12">
+      {{ new Date().getFullYear() }} —
+      <strong>Yam Yam Designed by N & E</strong>
+    </v-col>
+  </v-footer>
 </template>
+<!--<template>
+  <footer>
+     {{ new Date().getFullYear() }} —  <Strong>Yam Yam Designed by N & E</Strong>
+  </footer>
+</template>-->
 
 <style scoped lang="postcss">
   footer {
@@ -13,7 +21,7 @@
     background-size: 100% 100%;
   }
 
-  p {
+  .text-center {
     @apply text-white;
   }
 </style>
