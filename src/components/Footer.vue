@@ -1,27 +1,33 @@
 <template>
   <v-footer padless>
-    <v-col class="text-center" cols="12">
-      {{ new Date().getFullYear() }} —
-      <strong>Yam Yam Designed by N & E</strong>
+    <v-col class="text-center text-white" cols="12">
+      {{ year }} — <span>Yam Yam Designed by N <small>&</small> E</span>
     </v-col>
   </v-footer>
 </template>
-<!--<template>
-  <footer>
-     {{ new Date().getFullYear() }} —  <Strong>Yam Yam Designed by N & E</Strong>
-  </footer>
-</template>-->
+
+<script>
+export default {
+  data () {
+    return {
+      year: null
+    }
+  },
+  mounted () {
+    this.$nextTick(function () {
+      this.year = new Date().getFullYear()
+    })
+  }
+}
+</script>
 
 <style scoped lang="postcss">
-  footer {
-    display: grid;
-    place-items: center;
-    height: 6rem;
-    background: url('/images/footer.png') no-repeat;
-    background-size: 100% 100%;
-  }
+footer {
+  @apply grid h-24 bg-center bg-no-repeat bg-cover place-items-center;
+  background-image: url("/images/footer.png");
+}
 
-  .text-center {
-    @apply text-white;
-  }
+span {
+    @apply font-medium;
+}
 </style>

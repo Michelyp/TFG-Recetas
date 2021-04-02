@@ -28,7 +28,11 @@ module.exports = {
     borderRadius: {
       default: '12px'
     },
-    extend: {}
+    extend: {
+      maxWidth: {
+        '2xs': '15rem'
+      }
+    }
   },
   variants: {},
   plugins: []
