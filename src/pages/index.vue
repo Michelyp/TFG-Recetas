@@ -1,22 +1,16 @@
 <template>
   <div class="custainer">
-    <div class="w-2/5">
-      <img src="/images/inicio.png">
-    </div>
-    <div class="rigth-column">
+    <div class="left-column" />
+    <div class="right-column">
       <div>
-        <img class="h-32 px-12" src="/images/yamyam.png">
-        <h2>
-          <strong> Crea y descubre nuevas recetas</strong>
-        </h2>
-        <p>
-          <strong>Únete a Yam Yam ahora mismo.</strong>
-        </p>
+        <img src="/images/yamyam.png" title="Logo" alt="Logo">
+        <h1>Crea y descubre nuevas recetas</h1>
+        <p>Únete a Yam Yam ahora mismo.</p>
         <div class="botones">
-          <Button class="my-4" primary>
+          <Button class="mx-auto mb-6" primary>
             Regístrate
           </Button>
-          <Button class="my-4" secondary>
+          <Button class="mx-auto" secondary>
             Iniciar Sesión
           </Button>
         </div>
@@ -36,26 +30,73 @@ export default {
 </script>
 
 <style scoped lang="postcss">
+.custainer {
+  @apply flex flex-col-reverse flex-no-wrap w-screen mx-auto;
+}
+
+.left-column {
+  @apply w-full bg-center bg-no-repeat bg-cover;
+  background-image: url("/images/inicio.png");
+  height: calc(100vh - 6rem);
+}
+
+.left-column img {
+  @apply w-full;
+}
+
+.right-column {
+  @apply w-full px-12 pt-6 pb-12 text-center;
+}
+
+.right-column img {
+  @apply w-32 mx-auto;
+}
+
+.botones {
+  @apply flex flex-col max-w-xs mx-auto;
+}
+
+h1 {
+  @apply mb-2 text-4xl font-bold;
+  line-height: 1.2;
+  color: #370606;
+}
+
+p {
+  @apply mb-4 text-xl;
+  color: #370606;
+}
+
+@screen sm {
+  .right-column {
+    @apply pt-12 pb-24;
+  }
+}
+
+@screen lg {
   .custainer {
-    @apply flex flex-no-wrap w-screen min-h-screen mx-auto;
+    @apply flex-row;
+    height: calc(100vh - 6rem);
   }
 
-  .rigth-column {
-    @apply grid w-3/5 place-items-center font-poppins;
-  }
-
-  .botones {
-    @apply flex flex-col max-w-xs mx-auto;
-  }
-
-  h2 {
+  h1 {
     @apply px-12 text-6xl;
-    line-height: 1.2;
-    color: #370606;
   }
 
   p {
-    @apply px-12 pt-12 text-4xl;
-    color: #370606;
+    @apply px-12 mb-16 text-4xl;
   }
+
+  .left-column {
+    @apply w-2/5 h-auto;
+  }
+
+  .right-column {
+    @apply grid w-3/5 px-0 place-items-center;
+  }
+
+  .right-column img {
+    @apply w-48;
+  }
+}
 </style>
