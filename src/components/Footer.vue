@@ -1,6 +1,6 @@
 <template>
   <v-footer padless>
-    <v-col class="text-center text-white" cols="12">
+    <v-col class="tw-text-center tw-text-white" cols="12">
       {{ year }} — <span>Yam Yam Designed by N <small>&</small> E</span>
     </v-col>
   </v-footer>
