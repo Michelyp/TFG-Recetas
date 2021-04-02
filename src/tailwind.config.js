@@ -5,6 +5,7 @@ module.exports = {
     removeDeprecatedGapUtilities: true,
     purgeLayersByDefault: true
   },
+  prefix: 'tw-',
   purge: ['./**/*.html', './**/*.vue'],
   theme: {
     screens: {
@@ -13,6 +14,10 @@ module.exports = {
       lg: '1024px',
       xl: '1280px',
       '2xl': '1440px'
+    },
+    container: {
+      center: true,
+      padding: '2rem'
     },
     fontFamily: {
       roboto: ['Roboto', ...fontFamily.mono],
