@@ -1,5 +1,5 @@
 <template>
-  <div class="custainer">
+  <div class="re-container">
     <div class="left-column" />
     <div class="right-column">
       <div>
@@ -7,12 +7,12 @@
         <h1>Crea y descubre nuevas recetas</h1>
         <p>Únete a Yam Yam ahora mismo.</p>
         <div class="botones">
-          <Button class="mx-auto mb-6" primary>
+          <Link to="/register" class="mx-auto mb-8" btn-primary>
             Regístrate
-          </Button>
-          <Button class="mx-auto" secondary>
+          </Link>
+          <Link to="/login" class="mx-auto" btn-secondary>
             Iniciar Sesión
-          </Button>
+          </Link>
         </div>
       </div>
     </div>
@@ -20,17 +20,15 @@
 </template>
 
 <script>
-import Button from '@/components/Button'
+import Link from '@/components/Link'
 
 export default {
-  components: {
-    Button
-  }
+  components: { Link }
 }
 </script>
 
 <style scoped lang="postcss">
-.custainer {
+.re-container {
   @apply flex flex-col-reverse flex-no-wrap w-screen mx-auto;
 }
 
@@ -74,7 +72,7 @@ p {
 }
 
 @screen lg {
-  .custainer {
+  .re-container {
     @apply flex-row;
     height: calc(100vh - 6rem);
   }

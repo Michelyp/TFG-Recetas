@@ -17,3 +17,60 @@ export default {
   }
 }
 </script>
+
+<style lang="postcss">
+.btn {
+  @apply w-full py-2 text-lg rounded max-w-2xs;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn:focus {
+  @apply outline-none;
+}
+
+.re-primary {
+  @apply text-white bg-primary;
+}
+
+.re-secondary {
+  @apply bg-white text-primary;
+}
+
+@supports (-webkit-text-stroke: 1px black) {
+  .re-primary {
+    -webkit-text-stroke: 1px rgba(255, 253, 253, 0.5);
+  }
+  .re-secondary {
+    -webkit-text-stroke: 2px rgba(109, 42, 42, 0.5);
+  }
+}
+
+@screen lg {
+  .btn {
+    @apply py-4 text-lg rounded;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn:active {
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn:focus {
+    @apply outline-none;
+  }
+
+  .re-primary {
+    @apply bg-primary;
+    color: white !important;
+  }
+
+  .re-secondary {
+    @apply bg-white;
+    color: #6D2A2A !important;
+  }
+}
+</style>
