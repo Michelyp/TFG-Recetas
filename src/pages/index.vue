@@ -74,7 +74,7 @@ p {
 @screen lg {
   .re-container {
     @apply flex-row;
-    height: calc(100vh - 6rem);
+    height: calc(58rem - 6rem);
   }
 
   h1 {

@@ -18,6 +18,16 @@
         Registrate
       </Button>
       <small>¿Olvidaste tu contraseña?</small>
+      <v-snackbar
+        :timeout="4000"
+        v-model="snackbar"
+        absolute
+        bottom
+        center
+      >
+        {{ snackbarText }}
+      </v-snackbar>
+
     </v-form>
   </section>
 </template>
@@ -33,6 +43,8 @@ export default {
     formValid: false,
     email: '',
     password: '',
+    snackbar: false,
+    snackbarText: 'No error message',
     emailRules: [
       value => !!value || 'El correo es requerido',
       value => /^((([!#$%&'*+\-/=?^_`{|}~\w])|([!#$%&'*+\-/=?^_`{|}~\w][!#$%&'*+\-/=?^_`{|}~.\w]{0,}[!#$%&'*+\-/=?^_`{|}~\w]))[@]\w+([-.]\w+)*\.\w+([-.]\w+)*)$/.test(value) || 'Ingrese un correo válido'
@@ -43,7 +55,17 @@ export default {
   }),
   methods: {
     validate () {
-      return this.$refs.form.validate()
+      this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
+      .catch(function (error){
+        this.snackbarText = error.message
+        this.snackbar = true
+      }).then((user) => {
+        //we are signed in
+        $nuxt.$router.push('/')
+        return this.$refs.form.validate()
+
+      })
+
     },
     getData () {
       if (this.validate()) {
@@ -55,6 +77,7 @@ export default {
         return null
       }
     }
+
   }
 }
 </script>
