@@ -56,6 +56,9 @@ export default {
     '@nuxtjs/vuetify'
   ],
 
+  router: {
+    middleware: ['auth']
+  },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     [
@@ -71,7 +74,14 @@ export default {
           measurementId: process.env.MEASUREMENT_ID
         },
         services: {
-          auth: true,
+          auth: {
+            persistence: 'local', // default
+            initialize: {
+              onAuthStateChangedAction: 'onAuthStateChangedAction',
+              subscribeManually: false
+            },
+            ssr: false // default
+          },
           firestore: true,
           functions: true,
           storage: true,
