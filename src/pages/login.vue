@@ -19,15 +19,14 @@
       </Button>
       <small>¿Olvidaste tu contraseña?</small>
       <v-snackbar
-        :timeout="4000"
         v-model="snackbar"
+        :timeout="4000"
         absolute
         bottom
         center
       >
         {{ snackbarText }}
       </v-snackbar>
-
     </v-form>
   </section>
 </template>
@@ -56,16 +55,14 @@ export default {
   methods: {
     validate () {
       this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
-      .catch(function (error){
-        this.snackbarText = error.message
-        this.snackbar = true
-      }).then((user) => {
-        //we are signed in
-        $nuxt.$router.push('/')
-        return this.$refs.form.validate()
-
-      })
-
+        .catch(function (error) {
+          this.snackbarText = error.message
+          this.snackbar = true
+        }).then((user) => {
+        // we are signed in
+          $nuxt.$router.push('/')
+          return this.$refs.form.validate()
+        })
     },
     getData () {
       if (this.validate()) {
