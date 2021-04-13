@@ -9,5 +9,7 @@ module.exports = {
   },
   extends: ['@nuxtjs', 'plugin:nuxt/recommended'],
   // add your custom rules here
-  rules: {}
+  rules: {
+    'vue/no-lone-template': 'off'
+  }
 }

@@ -33,26 +33,28 @@
                         color="primary"
                         dark
                       >
-                        Logo debe de ir aqui con el color primario de fondo
+                        Login
                       </v-toolbar>
                       <v-card-text>
                         <v-form ref="form" v-model="formValid">
                           <div class="login-inputs">
-                            <v-text-field v-model="nombreUsuario" label="Nombre de usuario" :rules="emailRules" required />
-                            <v-text-field v-model="nombre" label="Nombre y Apellidos" :rules="emailRules" required />
+                            <v-text-field label="Nombre de usuario" required />
+                            <v-text-field label="Nombre y Apellidos" required />
                             <v-text-field v-model="email" label="Correo" :rules="emailRules" required />
                             <v-text-field v-model="password" type="password" :rules="passRules" label="Contraseña" required />
-                            <v-checkbox
-                              v-model="checkbox"
-                              :error-messages="checkboxErrors"
-                              label="Acepta los terminos y condiciones"
-                              required
-                              @change="$v.checkbox.$touch()"
-                              @blur="$v.checkbox.$touch()"
-                            />
-                            <Button primary>
-                              Registrate
-                            </Button>
+                            <div class="tw-text-center">
+                              <v-checkbox
+                                v-model="checkbox"
+                                class="mx-auto"
+                                :rules="checkboxRules"
+                                color="success"
+                                label="Acepta los terminos y condiciones"
+                                required
+                              />
+                              <Button primary @click="validate">
+                                Registrate
+                              </Button>
+                            </div>
                           </div>
                         </v-form>
                       </v-card-text>
@@ -89,6 +91,7 @@ export default {
     formValid: false,
     email: '',
     password: '',
+    checkbox: false,
     snackbar: false,
     snackbarText: 'No error message',
     emailRules: [
@@ -97,23 +100,26 @@ export default {
     ],
     passRules: [
       value => !!value || 'La contraseña es requerida'
+    ],
+    checkboxRules: [
+      value => value || 'Es necesario aceptar los términos y condiciones'
     ]
   }),
   methods: {
     validate () {
-
-    },
-    getData () {
-      if (this.validate()) {
-        return {
-          email: this.email,
-          password: this.password
-        }
-      } else {
-        return null
+      if (this.checkbox) {
+        this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+          .catch(function (error) {
+            this.snackbarText = error.message
+            this.snackbar = true
+          }).then((user) => {
+            // we are signed in
+            console.log(user)
+            this.$nuxt.$router.push('/')
+            return this.$refs.form.validate()
+          })
       }
     }
-
   }
 }
 </script>
