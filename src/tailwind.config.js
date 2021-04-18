@@ -31,7 +31,8 @@ module.exports = {
       transparent: 'transparent'
     },
     borderRadius: {
-      default: '12px'
+      default: '12px',
+      full: '50%'
     },
     extend: {
       maxWidth: {
