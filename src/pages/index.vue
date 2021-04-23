@@ -38,8 +38,8 @@
                       <v-card-text>
                         <v-form ref="form" v-model="formValid">
                           <div class="login-inputs">
-                            <v-text-field label="Nombre de usuario" required />
-                            <v-text-field label="Nombre y Apellidos" required />
+                            <v-text-field v-model="nombre" label="Nombre de usuario" required />
+                            <v-text-field  v-model="apellidos" label="Apellidos" required />
                             <v-text-field v-model="email" label="Correo" :rules="emailRules" required />
                             <v-text-field v-model="password" type="password" :rules="passRules" label="Contraseña" required />
                             <div class="tw-text-center">
@@ -90,7 +90,9 @@ export default {
   data: () => ({
     formValid: false,
     email: '',
-    password: '',
+    password: '', 
+    nombre: '',
+    apellidos: '',
     checkbox: false,
     snackbar: false,
     snackbarText: 'No error message',
@@ -106,19 +108,47 @@ export default {
     ]
   }),
   methods: {
-    validate () {
-      if (this.checkbox) {
-        this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
-          .catch(function (error) {
-            this.snackbarText = error.message
-            this.snackbar = true
-          }).then((user) => {
-            // we are signed in
-            console.log(user)
+   async validate() {
+    if(this.checkbox) {
+        let user
+        try {
+            user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+            console.log(user.user)
+            this.$fire.firestore.collection('user').doc('user').set({
+                nombre: this.nombre,
+                apellidos: this.apellidos,
+                email: this.email,
+                password: this.password
+            }).then(() => {
+                this.$store.dispatch('fetchUserProfile');
+                this.performingRequest = false;
+                this.$nuxt.$router.push('/')
+                return this.$refs.form.validate()
+            }).catch(err => {
+                console.log(err);
+                this.performingRequest = false;
+                this.errorMsg = err.message
+            })
             this.$nuxt.$router.push('/')
             return this.$refs.form.validate()
-          })
+        } catch (error) {
+            this.snackbarText = error.message
+            this.snackbar = true
+        }
+    }
+},
+      getData () {
+      if (this.validate()) {
+        return {
+          nombre: this.nombre,
+          apellidos: this.apellidos,
+          email: this.email,
+          password: this.password
+        }
+      } else {
+        return null
       }
+    
     }
   }
 }

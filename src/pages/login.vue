@@ -61,6 +61,7 @@ export default {
         }).then((user) => {
         // we are signed in
           this.$nuxt.$router.push('/')
+          console.log(user);
           return this.$refs.form.validate()
         })
     },
