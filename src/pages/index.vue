@@ -114,16 +114,15 @@ export default {
         try {
             user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
             console.log(user.user)
-            this.$fire.firestore.collection('user').doc('user').set({
+            this.$fire.firestore.collection('user').add({
                 nombre: this.nombre,
                 apellidos: this.apellidos,
                 email: this.email,
                 password: this.password
-            }).then(() => {
-                this.$store.dispatch('fetchUserProfile');
-                this.performingRequest = false;
-                this.$nuxt.$router.push('/')
-                return this.$refs.form.validate()
+            }).then(function(docRef){
+
+              console.log("Document written with ID: ", docRef.id)
+            
             }).catch(err => {
                 console.log(err);
                 this.performingRequest = false;
@@ -132,8 +131,7 @@ export default {
             this.$nuxt.$router.push('/')
             return this.$refs.form.validate()
         } catch (error) {
-            this.snackbarText = error.message
-            this.snackbar = true
+           console.log("Erro adding document", error)
         }
     }
 },

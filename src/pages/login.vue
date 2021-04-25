@@ -60,7 +60,7 @@ export default {
           this.snackbar = true
         }).then((user) => {
         // we are signed in
-          this.$nuxt.$router.push('/')
+          this.$nuxt.$router.push('/home')
           console.log(user);
           return this.$refs.form.validate()
         })
