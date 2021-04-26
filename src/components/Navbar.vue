@@ -1,62 +1,84 @@
 <template>
   <header>
     <nav>
-      <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
+      <img class="logo" src="/images/yamyam.png" alt="Logo de Yam Yam">
+      <div class="buscar">
+        <img src="/icons/search.svg" alt="Buscar">
+        <input type="search" placeholder="Buscar en Yam Yam">
+      </div>
       <ul>
         <li>
-          <img src="/icons/heart.svg" alt="Ícono de corazón">
+          <a href="#"><img src="/icons/heart.svg" alt="Ícono de corazón"></a>
         </li>
         <li>
-          <img src="/icons/home.svg" alt="Ícono de casa">
+          <a href="#"><img src="/icons/home.svg" alt="Ícono de casa"></a>
         </li>
         <li>
-          <img src="/icons/file.svg" alt="Ícono de archivo">
+          <a href="#"><img src="/icons/file.svg" alt="Ícono de archivo"></a>
         </li>
       </ul>
-      <div class="buscar">
-        <img class="tw-h-5" src="/icons/search.svg" alt="Buscar">
-        <input type="search" placeholder="Buscar en Yum Yum">
-      </div>
-      <img class="logo" src="/images/logo.png" alt="Logo de Yum Yum">
+      <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
     </nav>
   </header>
 </template>
 
 <style scoped lang="postcss">
     header {
-        @apply tw-flex tw-items-center tw-justify-center tw-px-12;
-        height: 205px;
-        border-bottom: 1px solid #D2CACA;
+        @apply grid items-center w-full mx-auto;
+        max-width: 928px;
     }
 
     nav {
-        @apply tw-grid tw-w-full tw-items-center tw-justify-items-center;
-        grid-template-columns: 1fr 2fr 4fr 1fr;
+        @apply grid items-center px-6 py-3 justify-items-center;
+        grid-template-columns: 1fr 2fr 1fr;
     }
 
-    .profile-img {
-        @apply tw-rounded-full;
-        height: 125px;
-    }
-
-    ul {
-        @apply tw-grid tw-grid-cols-3 tw-gap-x-6 tw-justify-items-center;
-        grid-template-columns: repeat(3, minmax(0, 36px));
-        grid-template-rows: auto;
+    .logo {
+        @apply w-12;
+        justify-self: left;
     }
 
     .buscar {
-        @apply tw-flex tw-flex-no-wrap tw-rounded tw-justify-center tw-items-center tw-w-full;
-        max-width: 480px;
+        @apply items-center hidden w-full rounded;
         border: 1px solid #D2CACA;
         background: #FDF8F8;
     }
 
-    input {
-        @apply tw-py-4 tw-outline-none tw-ml-6;
+    ul {
+        @apply grid p-0 gap-x-6;
+        grid-template-columns: repeat(3, 24px);
     }
 
-    .logo {
-        height: 138px;
+    li img {
+        @apply h-6;
+    }
+
+    .profile-img {
+        @apply w-12 rounded-full;
+        justify-self: right;
+    }
+
+    @screen md {
+        nav {
+            grid-template-columns: 1fr 2fr 2fr 1fr;
+        }
+
+        .buscar {
+            @apply grid px-4 py-1;
+            max-width: 240px;
+            grid-template-columns: 20px auto;
+        }
+
+        .buscar img {
+            @apply w-5;
+        }
+
+        .buscar input {
+            @apply w-full pl-2 outline-none;
+        }
+
+        ul {
+            justify-self: right;
+        }
     }
 </style>
