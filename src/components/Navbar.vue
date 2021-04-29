@@ -1,11 +1,7 @@
 <template>
   <header>
     <nav>
-      <img class="logo" src="/images/yamyam.png" alt="Logo de Yam Yam">
-      <div class="buscar">
-        <img src="/icons/search.svg" alt="Buscar">
-        <input type="search" placeholder="Buscar en Yam Yam">
-      </div>
+      <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
       <ul>
         <li>
           <a href="#"><img src="/icons/heart.svg" alt="Ícono de corazón"></a>
@@ -17,25 +13,30 @@
           <a href="#"><img src="/icons/file.svg" alt="Ícono de archivo"></a>
         </li>
       </ul>
-      <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
+      <div class="buscar">
+        <img src="/icons/search.svg" alt="Buscar">
+        <input type="search" placeholder="Buscar en Yam Yam">
+      </div>
+      <img class="logo" src="/images/yamyam.png" alt="Logo de Yam Yam">
     </nav>
   </header>
 </template>
 
 <style scoped lang="postcss">
     header {
-        @apply grid items-center w-full mx-auto;
-        max-width: 928px;
+        @apply sticky top-0 grid items-center w-full py-3 mb-12 bg-white border-b border-dark;
+        height: 100px;
     }
 
     nav {
-        @apply grid items-center px-6 py-3 justify-items-center;
+        @apply grid items-center px-6 justify-items-center;
         grid-template-columns: 1fr 2fr 1fr;
+        max-width: 928px;
     }
 
     .logo {
         @apply w-12;
-        justify-self: left;
+        justify-self: right;
     }
 
     .buscar {
@@ -55,11 +56,12 @@
 
     .profile-img {
         @apply w-12 rounded-full;
-        justify-self: right;
+        justify-self: left;
     }
 
     @screen md {
         nav {
+            @apply mx-auto;
             grid-template-columns: 1fr 2fr 2fr 1fr;
         }
 
@@ -78,7 +80,7 @@
         }
 
         ul {
-            justify-self: right;
+            justify-self: left;
         }
     }
 </style>

@@ -39,7 +39,7 @@
                         <v-form ref="form" v-model="formValid">
                           <div class="login-inputs">
                             <v-text-field v-model="nombre" label="Nombre de usuario" required />
-                            <v-text-field  v-model="apellidos" label="Apellidos" required />
+                            <v-text-field v-model="apellidos" label="Apellidos" required />
                             <v-text-field v-model="email" label="Correo" :rules="emailRules" required />
                             <v-text-field v-model="password" type="password" :rules="passRules" label="Contraseña" required />
                             <div class="tw-text-center">
@@ -90,7 +90,7 @@ export default {
   data: () => ({
     formValid: false,
     email: '',
-    password: '', 
+    password: '',
     nombre: '',
     apellidos: '',
     checkbox: false,
@@ -108,34 +108,32 @@ export default {
     ]
   }),
   methods: {
-   async validate() {
-    if(this.checkbox) {
+    async validate () {
+      if (this.checkbox) {
         let user
         try {
-            user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
-            console.log(user.user)
-            this.$fire.firestore.collection('user').add({
-                nombre: this.nombre,
-                apellidos: this.apellidos,
-                email: this.email,
-                password: this.password
-            }).then(function(docRef){
-
-              console.log("Document written with ID: ", docRef.id)
-            
-            }).catch(err => {
-                console.log(err);
-                this.performingRequest = false;
-                this.errorMsg = err.message
-            })
-            this.$nuxt.$router.push('/')
-            return this.$refs.form.validate()
+          user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+          console.log(user.user)
+          this.$fire.firestore.collection('user').add({
+            nombre: this.nombre,
+            apellidos: this.apellidos,
+            email: this.email,
+            password: this.password
+          }).then(function (docRef) {
+            console.log('Document written with ID: ', docRef.id)
+          }).catch((err) => {
+            console.log(err)
+            this.performingRequest = false
+            this.errorMsg = err.message
+          })
+          this.$nuxt.$router.push('/')
+          return this.$refs.form.validate()
         } catch (error) {
-           console.log("Erro adding document", error)
+          console.log('Erro adding document', error)
         }
-    }
-},
-      getData () {
+      }
+    },
+    getData () {
       if (this.validate()) {
         return {
           nombre: this.nombre,
@@ -146,7 +144,6 @@ export default {
       } else {
         return null
       }
-    
     }
   }
 }

@@ -1,16 +1,22 @@
 <template>
-  <div>
-     <NavigationDrawer />
-  </div>
+  <main>
+    <h1>Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
+  </main>
 </template>
 
 <script>
-import NavigationDrawer from '@/components/NavigationDrawer'
-
 export default {
-  comoponents:{
-    NavigationDrawer
-  },
   layout: 'home'
 }
 </script>
+
+<style scoped lang="postcss">
+    main {
+        @apply px-6 break-all;
+        height: 400vh;
+    }
+
+    @screen lg {
+        @apply pr-0;
+    }
+</style>
