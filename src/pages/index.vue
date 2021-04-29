@@ -114,11 +114,10 @@ export default {
         try {
           user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
           console.log(user.user)
-          this.$fire.firestore.collection('user').add({
+            this.$fire.firestore.collection('user').doc(user.user.uid).set({
             nombre: this.nombre,
             apellidos: this.apellidos,
-            email: this.email,
-            password: this.password
+            email: this.email
           }).then(function (docRef) {
             console.log('Document written with ID: ', docRef.id)
           }).catch((err) => {
@@ -138,8 +137,7 @@ export default {
         return {
           nombre: this.nombre,
           apellidos: this.apellidos,
-          email: this.email,
-          password: this.password
+          email: this.email
         }
       } else {
         return null
