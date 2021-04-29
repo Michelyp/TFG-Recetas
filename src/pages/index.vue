@@ -110,14 +110,15 @@ export default {
   methods: {
     async validate () {
       if (this.checkbox) {
-        let user
+        let loggedin
         try {
-          user = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
-          console.log(user.user)
-            this.$fire.firestore.collection('user').doc(user.user.uid).set({
+          loggedin = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
+          console.log(loggedin)
+          this.$fire.firestore.collection('user').doc(loggedin.user.uid).set({
             nombre: this.nombre,
             apellidos: this.apellidos,
-            email: this.email
+            email: this.email,
+            username: (this.email.split('@'))[0]
           }).then(function (docRef) {
             console.log('Document written with ID: ', docRef.id)
           }).catch((err) => {
@@ -128,7 +129,7 @@ export default {
           this.$nuxt.$router.push('/')
           return this.$refs.form.validate()
         } catch (error) {
-          console.log('Erro adding document', error)
+          console.log('Error adding document', error)
         }
       }
     },

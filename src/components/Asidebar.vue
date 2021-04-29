@@ -4,8 +4,8 @@
       <img class="profile-img" src="images/gatito-serio.png" alt="Gatito serio">
       <article>
         <div>
-          <span class="name">Erian Ranger</span>
-          <span class="alias">@erianvc</span>
+          <span class="name">{{ nombre }} {{ apellidos }}</span>
+          <span class="alias">@{{ username }}</span>
         </div>
       </article>
     </section>
@@ -32,6 +32,23 @@
     </section>
   </aside>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    nombre: '',
+    apellidos: '',
+    username: ''
+  }),
+  mounted () {
+    const userInfo = JSON.parse(sessionStorage.getItem('user'))
+    console.log(userInfo)
+    this.nombre = userInfo.nombre
+    this.apellidos = userInfo.apellidos
+    this.username = userInfo.username
+  }
+}
+</script>
 
 <style scoped lang="postcss">
     aside {

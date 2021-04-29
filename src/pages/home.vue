@@ -9,7 +9,7 @@
 import Steper2 from '@/components/Steper2'
 
 export default {
-  comoponents:{
+  comoponents: {
     Steper2
   },
   layout: 'home'
