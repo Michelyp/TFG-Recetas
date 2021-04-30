@@ -1,16 +1,21 @@
 <template>
   <main>
-    <h1>Holaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
-    <Steper2 />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
+    <Card />
   </main>
 </template>
 
 <script>
-import Steper2 from '@/components/Steper2'
+import Card from '@/components/Card'
 
 export default {
   comoponents: {
-    Steper2
+    Card
   },
   layout: 'home'
 }
@@ -18,11 +23,24 @@ export default {
 
 <style scoped lang="postcss">
     main {
-        @apply px-6 break-all;
+        @apply grid grid-cols-1 px-6 break-all justify-items-center;
         height: 400vh;
     }
 
     @screen lg {
         @apply pr-0;
+    }
+
+    @screen xl {
+        main {
+            @apply grid-cols-2 gap-6;
+            grid-template-rows: repeat(4, minmax(0, 520px));
+        }
+    }
+
+    @screen 2xl {
+        main {
+            @apply gap-0;
+        }
     }
 </style>
