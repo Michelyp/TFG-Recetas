@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <Nuxt />
+    <Nuxt class="app-router" />
     <Footer v-if="showsFooter" />
   </v-app>
 </template>
@@ -19,6 +19,10 @@ export default {
 </script>
 
 <style lang="postcss">
+.app-router {
+  min-height: calc(100vh - 96px);
+}
+
 .btn {
   @apply w-full py-2 text-lg rounded max-w-2xs;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
