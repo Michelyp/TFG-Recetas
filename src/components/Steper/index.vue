@@ -23,7 +23,7 @@ import Step3 from './Step3'
 export default {
   components: { Step1, Step2, Step3 },
   data: () => ({
-    currentStep: 1,
+    currentStep: 2,
     lastStep: 4,
     steps: [
       { name: 'Nombre de tu receta' },

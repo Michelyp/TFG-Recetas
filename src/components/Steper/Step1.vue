@@ -39,10 +39,7 @@
 </template>
 
 <script>
-import Button from '@/components/Button'
-
 export default {
-  components: { Button },
   data: () => ({
     image: null,
     imageName: 'Selecciona una imagen'
