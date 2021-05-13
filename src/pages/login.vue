@@ -20,7 +20,7 @@
       <small>¿Olvidaste tu contraseña?</small>
       <v-snackbar
         v-model="snackbar"
-        :timeout="4000"
+        :timeout="2000"
         absolute
         bottom
         center
@@ -56,8 +56,9 @@ export default {
     validate () {
       this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
         .catch(function (error) {
-          this.snackbarText = error.message
-          this.snackbar = true
+       ///   this.snackbarText = error.message
+         // this.snackbar = true
+         console.log(error);
         }).then((user) => {
         // we are signed in
           this.$fire.firestore.collection('user').doc(user.user.uid).get()

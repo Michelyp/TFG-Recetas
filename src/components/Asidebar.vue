@@ -19,11 +19,11 @@
         <li>
           <img src="/icons/message.svg" alt="Perfil">
           <span>Mensajes</span>
-        </li>
-        <li>
-          <img src="/icons/alarm.svg" alt="Agregar receta">
-          <span>Agregar receta</span>
-        </li>
+        </li>        
+          <Link to="/createRecipe" class="enlace">
+            <img src="/icons/alarm.svg" alt="Agregar receta">
+            <span>Agregar receta</span>
+          </Link>
         <li>
           <img src="/icons/more-options.svg" alt="Más opciones">
           <span>Más opciones</span>
@@ -34,7 +34,10 @@
 </template>
 
 <script>
+import Link from '@/components/Link'
+
 export default {
+  components: {Link},
   data: () => ({
     nombre: '',
     apellidos: '',
@@ -84,7 +87,12 @@ export default {
         grid-template-rows: repeat(4, minmax(0, fit-content(100%)));
     }
 
-    ul li {
+    ul li, .enlace {
+        @apply grid gap-x-4;
+        grid-template-columns: 24px auto;
+    }
+
+     ul li {
         @apply grid gap-x-4;
         grid-template-columns: 24px auto;
     }
