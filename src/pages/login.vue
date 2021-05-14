@@ -56,9 +56,9 @@ export default {
     validate () {
       this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
         .catch(function (error) {
-       ///   this.snackbarText = error.message
-         // this.snackbar = true
-         console.log(error);
+          ///   this.snackbarText = error.message
+          // this.snackbar = true
+          console.log(error)
         }).then((user) => {
         // we are signed in
           this.$fire.firestore.collection('user').doc(user.user.uid).get()

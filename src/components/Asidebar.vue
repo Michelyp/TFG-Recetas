@@ -19,11 +19,11 @@
         <li>
           <img src="/icons/message.svg" alt="Perfil">
           <span>Mensajes</span>
-        </li>        
-          <Link to="/createRecipe" class="enlace">
-            <img src="/icons/alarm.svg" alt="Agregar receta">
-            <span>Agregar receta</span>
-          </Link>
+        </li>
+        <Link to="/createRecipe" class="enlace">
+          <img src="/icons/alarm.svg" alt="Agregar receta">
+          <span>Agregar receta</span>
+        </Link>
         <li>
           <img src="/icons/more-options.svg" alt="Más opciones">
           <span>Más opciones</span>
@@ -37,7 +37,7 @@
 import Link from '@/components/Link'
 
 export default {
-  components: {Link},
+  components: { Link },
   data: () => ({
     nombre: '',
     apellidos: '',
