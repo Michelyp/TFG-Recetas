@@ -44,10 +44,10 @@ export default {
     username: ''
   }),
   mounted () {
-    const userInfo = JSON.parse(sessionStorage.getItem('user'))
-    this.nombre = userInfo.nombre
-    this.apellidos = userInfo.apellidos
-    this.username = userInfo.username
+    const { nombre, apellidos, username } = JSON.parse(sessionStorage.getItem('user'))
+    this.nombre = nombre
+    this.apellidos = apellidos
+    this.username = username
   }
 }
 </script>

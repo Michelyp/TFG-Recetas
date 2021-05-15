@@ -1,8 +1,8 @@
 <template>
   <article>
-    <div class="cover" :style="`background-image: url(${imgCover});`">
+    <div class="cover" :style="imgCover ? { backgroundImage: 'url(data:image/' + imgType + ';base64,' + imgCover + ')' } : { backgroundImage: 'url(/images/cake.png);' }">
       <div class="info">
-        {{ cookingTime }} | {{ rations }} personas
+        {{ cookingTime > 1 ? cookingTime + ' mins' : cookingTime + 'min' }} | {{ rations }} personas
       </div>
     </div>
     <div class="title">
@@ -14,13 +14,11 @@
 <script>
 export default {
   props: {
-    imgCover: {
-      type: String,
-      default: '/images/cake.png'
-    },
+    imgCover: { type: String },
+    imgType: { type: String },
     cookingTime: {
-      type: String,
-      default: '34 min'
+      type: Number,
+      default: 34
     },
     rations: {
       type: Number,
