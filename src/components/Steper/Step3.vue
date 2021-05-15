@@ -15,7 +15,7 @@
           Agregar ingrediente
         </Button>
 
-        <p v-for="(ingredient, index) in ingredients" :key="index">
+        <p v-for="(ingredient, index) in dataStep3.ingredients" :key="index">
           {{ ingredient }}
         </p>
       </div>
@@ -27,16 +27,16 @@
             Agregar paso
           </Button>
 
-          <p v-for="(step, index) in steps" :key="index">
+          <p v-for="(step, index) in dataStep3.steps" :key="index">
             Paso {{ index + 1 }}: {{ step }}
           </p>
         </div>
         <div class="buttons">
-          <Button primary>
-            Continuar
+          <Button primary @click="onSubmit">
+            Finalizar
           </Button>
-          <Button>
-            Cancelar
+          <Button @click="previous">
+            Retroceder
           </Button>
         </div>
       </div>
@@ -49,21 +49,67 @@ export default {
   data: () => ({
     ingredientValue: '',
     stepValue: '',
-    ingredients: [],
-    steps: []
+    dataStep3: {
+      ingredients: [],
+      steps: []
+    }
   }),
   methods: {
     addIngredient () {
       if (this.ingredientValue) {
-        this.ingredients.push(this.ingredientValue)
+        this.dataStep3.ingredients.push(this.ingredientValue)
         this.ingredientValue = ''
       }
     },
     addStep () {
       if (this.stepValue) {
-        this.steps.push(this.stepValue)
+        this.dataStep3.steps.push(this.stepValue)
         this.stepValue = ''
       }
+    },
+    onSubmit () {
+      if (this.dataStep3.ingredients.length < 1) {
+        alert('Debe agregar al menos 1 ingrediente')
+      } else if (this.dataStep3.steps.length < 1) {
+        alert('Debe agregar al menos 1 paso para la preparación')
+      } else {
+        this.saveRecipe()
+      }
+    },
+    previous () {
+      this.$emit('moveStep', 2)
+    },
+    saveRecipe () {
+      const { uid } = JSON.parse(sessionStorage.getItem('user'))
+      const { image, imageType, recipeName, recipeDesc } = JSON.parse(sessionStorage.getItem('DATA_STEP_1'))
+      const { rationsValue, categoryValue, gastronomyValue, setUpTimeValue, difficultyValue, cookTimeValue } = JSON.parse(sessionStorage.getItem('DATA_STEP_2'))
+      this.$fire.firestore.collection('user').doc(uid)
+        .collection('recipes').add({
+          imgSrc: image,
+          imgType: imageType,
+          name: recipeName,
+          description: recipeDesc,
+          rations: rationsValue,
+          category: categoryValue,
+          gastronomy: gastronomyValue,
+          setUpTime: setUpTimeValue,
+          difficulty: difficultyValue,
+          cookTime: cookTimeValue,
+          ingredients: this.dataStep3.ingredients,
+          steps: this.dataStep3.steps
+        })
+        .then(() => {
+          sessionStorage.removeItem('DATA_STEP_1')
+          sessionStorage.removeItem('DATA_STEP_2')
+          sessionStorage.setItem('savedRecipeIsOk', JSON.stringify(true))
+          this.$emit('moveStep', 4)
+        })
+        .catch(() => {
+          sessionStorage.removeItem('DATA_STEP_1')
+          sessionStorage.removeItem('DATA_STEP_2')
+          sessionStorage.setItem('savedRecipeIsOk', JSON.stringify(false))
+          this.$emit('moveStep', 4)
+        })
     }
   }
 }

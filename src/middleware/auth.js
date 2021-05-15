@@ -1,5 +1,5 @@
 export default function ({ app, route, redirect }) {
-  const ALLOWED_ROUTES = ['/', '/login', '/home', '/nueva-receta']
+  const ALLOWED_ROUTES = ['/', '/login', '/nueva-receta']
 
   if (!ALLOWED_ROUTES.includes(route.path)) {
     // we are on a protected route

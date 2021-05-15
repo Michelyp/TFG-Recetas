@@ -10,17 +10,17 @@
     <div class="specs">
       <div class="spec rations">
         <label for="rations">Número de raciones:</label>
-        <input id="rations" type="number" placeholder="Número de raciones">
+        <input id="rations" v-model="dataStep2.rationsValue" type="number" placeholder="Número de raciones">
       </div>
 
       <div class="spec setup-time">
         <label for="setup-time">Tiempo de preparación:</label>
-        <input id="setup-time" type="number" placeholder="Tiempo en minutos">
+        <input id="setup-time" v-model="dataStep2.setUpTimeValue" type="number" placeholder="Tiempo en minutos">
       </div>
 
       <div class="spec category">
         <label for="category">Escoge una categoría:</label>
-        <select id="category">
+        <select id="category" v-model="dataStep2.categoryValue">
           <option value="">
             Selecciona
           </option>
@@ -32,7 +32,7 @@
 
       <div class="spec difficulty">
         <label for="difficulty">Dificultad:</label>
-        <select id="difficulty">
+        <select id="difficulty" v-model="dataStep2.difficultyValue">
           <option value="">
             Selecciona
           </option>
@@ -44,7 +44,7 @@
 
       <div class="spec gastronomy">
         <label for="gastronomy">Gastronomía:</label>
-        <select id="gastronomy">
+        <select id="gastronomy" v-model="dataStep2.gastronomyValue">
           <option value="">
             Selecciona
           </option>
@@ -56,15 +56,15 @@
 
       <div class="spec cook-time">
         <label for="cook-time">Tiempo de cocina:</label>
-        <input id="cook-time" type="number" placeholder="Tiempo en minutos">
+        <input id="cook-time" v-model="dataStep2.cookTimeValue" type="number" placeholder="Tiempo en minutos">
       </div>
 
       <div class="buttons">
-        <Button primary class="continuar">
+        <Button primary @click="onSubmit">
           Continuar
         </Button>
-        <Button class="cancelar">
-          Cancelar
+        <Button @click="previous">
+          Retroceder
         </Button>
       </div>
     </div>
@@ -76,8 +76,45 @@ export default {
   data: () => ({
     categories: ['acompañamientos', 'bebidas', 'ensaladas', 'entrantes', 'postres y desayunos', 'primeros', 'segundos', 'salsas y bases'],
     difficulties: ['fácil', 'moderado', 'difícil'],
-    gastronomies: ['macrobiótica', 'frugívora', 'naturista', 'vegetariana']
-  })
+    gastronomies: ['macrobiótica', 'frugívora', 'naturista', 'vegetariana'],
+    dataStep2: {
+      rationsValue: null,
+      categoryValue: '',
+      gastronomyValue: '',
+      setUpTimeValue: null,
+      difficultyValue: '',
+      cookTimeValue: null
+    }
+  }),
+  mounted () {
+    const DATA_STEP_2 = JSON.parse(sessionStorage.getItem('DATA_STEP_2'))
+    if (DATA_STEP_2) {
+      this.dataStep2 = DATA_STEP_2
+    }
+  },
+  methods: {
+    onSubmit () {
+      if (!this.dataStep2.rationsValue) {
+        alert('Es necesario el número de raciones')
+      } else if (!this.dataStep2.categoryValue) {
+        alert('Es necesario asignar una categoría')
+      } else if (!this.dataStep2.gastronomyValue) {
+        alert('Es necesario asignar una gastronomía')
+      } else if (!this.dataStep2.setUpTimeValue) {
+        alert('Es necesario el tiempo de preparación')
+      } else if (!this.dataStep2.difficultyValue) {
+        alert('Es necesario asignar una dificultad')
+      } else if (!this.dataStep2.cookTimeValue) {
+        alert('Es necesario el tiempo de cocinado')
+      } else {
+        sessionStorage.setItem('DATA_STEP_2', JSON.stringify(this.dataStep2))
+        this.$emit('moveStep', 3)
+      }
+    },
+    previous () {
+      this.$emit('moveStep', 1)
+    }
+  }
 }
 </script>
 
@@ -116,6 +153,7 @@ export default {
     }
 
     .spec select {
+        @apply capitalize;
         background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8' standalone='no'%3F%3E%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' style='isolation:isolate' viewBox='0 0 124 68' width='124pt' height='68pt'%3E%3Cdefs%3E%3CclipPath id='_clipPath_cPi1n772FBrvzOYLSmwUJQ9ETHuaPaSX'%3E%3Crect width='124' height='68'/%3E%3C/clipPath%3E%3C/defs%3E%3Cg clip-path='url(%23_clipPath_cPi1n772FBrvzOYLSmwUJQ9ETHuaPaSX)'%3E%3CclipPath id='_clipPath_GtCziRMeIOtCvs9WFEpczL4deinf64zo'%3E%3Crect x='0' y='0' width='124' height='68' transform='matrix(1,0,0,1,0,0)' fill='rgb(255,255,255)'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23_clipPath_GtCziRMeIOtCvs9WFEpczL4deinf64zo)'%3E%3Cg%3E%3Cg%3E%3Cg%3E%3Cpath d=' M 1.779 10.2 L 57.779 66.2 C 60.079 68.5 63.879 68.5 66.18 66.2 L 122.18 10.2 C 125.98 6.399 123.28 0 117.98 0 L 5.98 0 C 0.679 0 -2.021 6.399 1.779 10.2 Z ' fill='rgb(146, 146, 146)'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right calc(.375em + .1875rem) center;

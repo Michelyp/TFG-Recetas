@@ -15,22 +15,22 @@
       </div>
 
       <div class="upload" @click="clickInputFile">
-        <img src="/icons/upload.svg" alt="Upload icon">
-        <span>{{ imageName }}</span>
-        <input ref="fileInput" type="file" accept="image/*" @change="onFilePicked">
+        <img :src="!dataStep1.image ? '/icons/upload.svg' : '/icons/check.svg'" alt="Upload icon">
+        <span>{{ dataStep1.imageName ? dataStep1.imageName : 'Selecciona una imagen' }}</span>
+        <input ref="fileInput" type="file" accept="image/*" @change="onFilePicked($event)">
       </div>
     </div>
 
     <div class="right">
-      <input type="text" placeholder="Nombre de la receta">
+      <input v-model="dataStep1.recipeName" type="text" placeholder="Nombre de la receta">
 
-      <textarea placeholder="Descripción" />
+      <textarea v-model="dataStep1.recipeDesc" placeholder="Descripción" />
 
       <div class="buttons">
-        <Button primary class="continuar">
+        <Button primary @click="onSubmit">
           Continuar
         </Button>
-        <Button class="cancelar">
+        <Button>
           Cancelar
         </Button>
       </div>
@@ -41,22 +41,55 @@
 <script>
 export default {
   data: () => ({
-    image: null,
-    imageName: 'Selecciona una imagen'
+    dataStep1: {
+      image: null,
+      imageName: null,
+      imageType: '',
+      recipeName: '',
+      recipeDesc: ''
+    }
   }),
+  mounted () {
+    const DATA_STEP_1 = JSON.parse(sessionStorage.getItem('DATA_STEP_1'))
+    if (DATA_STEP_1) {
+      this.dataStep1 = DATA_STEP_1
+    }
+  },
   methods: {
     clickInputFile () {
       this.$refs.fileInput.click()
     },
     onFilePicked (event) {
-      const files = event.target.files
-      this.imageName = files[0].name
-      const fileReader = new FileReader()
-      fileReader.addEventListener('load', () => {
-        this.imageUrl = fileReader.result
-      })
-      fileReader.readAsDataURL(files[0])
-      this.image = files[0]
+      const inputElement = event.target
+      const file = inputElement.files[0]
+      const mimeType = file?.type
+      const fileType = mimeType.split('/')[1]
+
+      if (file && (mimeType.includes('image'))) {
+        const reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.onload = () => {
+          this.dataStep1.image = reader.result.toString().split(',')[1]
+          this.dataStep1.imageName = file.name
+          this.dataStep1.imageType = fileType
+        }
+      } else {
+        this.dataStep1.image = null
+        this.dataStep1.imageName = null
+        alert('Solo se permiten imágenes')
+      }
+    },
+    onSubmit () {
+      if (!this.dataStep1.image) {
+        alert('Es necesaria una imagen')
+      } else if (!this.dataStep1.recipeName) {
+        alert('Es necesario un nombre para la receta')
+      } else if (!this.dataStep1.recipeDesc) {
+        alert('Es necesario una descripción para la receta')
+      } else {
+        sessionStorage.setItem('DATA_STEP_1', JSON.stringify(this.dataStep1))
+        this.$emit('moveStep', 2)
+      }
     }
   }
 }
@@ -80,7 +113,7 @@ export default {
     }
 
     .upload {
-        @apply relative grid py-6 border rounded cursor-pointer border-primary justify-items-center gap-y-2;
+        @apply relative grid py-6 border rounded cursor-pointer select-none border-primary justify-items-center gap-y-2;
     }
 
     .upload img {
@@ -145,11 +178,7 @@ export default {
             @apply grid-cols-2 gap-y-0 gap-x-4;
         }
 
-        .continuar {
-            @apply py-0;
-        }
-
-        .cancelar {
+        button {
             @apply py-0;
         }
     }

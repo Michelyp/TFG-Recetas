@@ -1,17 +1,18 @@
 <template>
   <article>
-    <section class="header">
+    <section v-if="currentStep !== lastStep" class="header">
       <div class="step">
         {{ currentStep }}
       </div>
       <span class="title">
-        {{ steps[currentStep - 1].name }}
+        {{ steps[currentStep - 1].title }}
       </span>
       <hr class="line">
     </section>
-    <Step1 v-if="currentStep === 1" />
-    <Step2 v-else-if="currentStep === 2" />
-    <Step3 v-else-if="currentStep === 3" />
+    <Step1 v-if="currentStep === 1" @moveStep="goToNextStep" />
+    <Step2 v-else-if="currentStep === 2" @moveStep="goToNextStep" />
+    <Step3 v-else-if="currentStep === 3" @moveStep="goToNextStep" />
+    <StepComplete v-else-if="currentStep === lastStep" />
   </article>
 </template>
 
@@ -19,22 +20,25 @@
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
+import StepComplete from './StepComplete'
 
 export default {
-  components: { Step1, Step2, Step3 },
+  components: { Step1, Step2, Step3, StepComplete },
   data: () => ({
-    currentStep: 3,
+    currentStep: 1,
     lastStep: 4,
     steps: [
-      { name: 'Nombre de tu receta' },
-      { name: 'Información de la receta' },
-      { name: 'Ingrediente y pasos de la receta' },
-      { name: 'Complete' }
+      { title: 'Nombre de tu receta' },
+      { title: 'Información de la receta' },
+      { title: 'Ingrediente y pasos de la receta' }
     ],
-    valid: false,
-    stepForm: []
+    valid: false
   }),
-  methods: { }
+  methods: {
+    goToNextStep (nextStep) {
+      this.currentStep = nextStep
+    }
+  }
 }
 </script>
 

@@ -20,7 +20,7 @@
           <img src="/icons/message.svg" alt="Perfil">
           <span>Mensajes</span>
         </li>
-        <Link to="/createRecipe" class="enlace">
+        <Link to="/nueva-receta" class="enlace">
           <img src="/icons/alarm.svg" alt="Agregar receta">
           <span>Agregar receta</span>
         </Link>
@@ -45,7 +45,6 @@ export default {
   }),
   mounted () {
     const userInfo = JSON.parse(sessionStorage.getItem('user'))
-    console.log(userInfo)
     this.nombre = userInfo.nombre
     this.apellidos = userInfo.apellidos
     this.username = userInfo.username

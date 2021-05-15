@@ -55,26 +55,20 @@ export default {
   methods: {
     validate () {
       this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)
-        .catch(function (error) {
+        .catch(function () {
           ///   this.snackbarText = error.message
           // this.snackbar = true
-          console.log(error)
         }).then((user) => {
         // we are signed in
           this.$fire.firestore.collection('user').doc(user.user.uid).get()
             .then((doc) => {
               if (doc.exists) {
-                console.log('Document data:', doc.data())
-                sessionStorage.setItem('user', JSON.stringify(doc.data()))
-              } else {
-                // doc.data() will be undefined in this case
-                console.log('No such document!')
+                sessionStorage.setItem('user', JSON.stringify({ ...doc.data(), uid: user.user.uid }))
               }
               this.$nuxt.$router.push('/home')
-              console.log(user)
               return this.$refs.form.validate()
             }).catch((error) => {
-              console.log('Error getting document:', error)
+              console.error('Error getting document:', error)
             })
         })
     },

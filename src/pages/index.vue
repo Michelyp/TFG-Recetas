@@ -113,7 +113,6 @@ export default {
         let loggedin
         try {
           loggedin = await this.$fire.auth.createUserWithEmailAndPassword(this.email, this.password)
-          console.log(loggedin)
           this.$fire.firestore.collection('user').doc(loggedin.user.uid).set({
             nombre: this.nombre,
             apellidos: this.apellidos,
@@ -122,14 +121,13 @@ export default {
           }).then(function (docRef) {
             console.log('Document written with ID: ', docRef.id)
           }).catch((err) => {
-            console.log(err)
             this.performingRequest = false
             this.errorMsg = err.message
           })
           this.$nuxt.$router.push('/')
           return this.$refs.form.validate()
         } catch (error) {
-          console.log('Error adding document', error)
+          console.error('Error adding document', error)
         }
       }
     },
