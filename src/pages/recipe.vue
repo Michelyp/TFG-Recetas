@@ -5,8 +5,9 @@
       <div>
         <img src="/images/pancakes.png" alt="Pancake">
       </div>
+      <div class="contenedorTexto">
       <div class="title">
-        <h1>Pancakes<h1 /></h1>
+        <h1>Pancakes</h1>
       </div>
       <div>
         <span>Nivel: Medio</span>
@@ -26,16 +27,25 @@
         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit ante luctus, nec platea nisi aptent tempor maecenas lectus est, potenti himenaeos augue ac fringilla nascetur urna cursus. Facilisis montes ut tempor venenatis euismod netus integer, Lorem ipsum dolor sit amet consectetur adipiscing elit ante luctus, nec platea nisi aptent tempor maecenas lectus est, potenti himenaeos augue ac fringilla nascetur urna cursus. Facilisis montes ut tempor venenatis euismod netus integer.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit ante luctus, nec platea nisi aptent tempor maecenas lectus est, potenti himenaeos augue ac fringilla nascetur urna cursus. Facilisis montes ut tempor venenatis euismod netus integer, Lorem ipsum dolor sit amet consectetur adipiscing elit ante luctus, nec platea nisi aptent tempor maecenas lectus est, potenti himenaeos augue ac fringilla nascetur urna cursus. Facilisis montes ut tempor venenatis euismod netus integer.</p>
       </div>
+      </div>
+
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
 
 export default {
-  components: { Navbar, Footer }
+  components: { Navbar }
 }
 </script>
+<style scoped lang="postcss">
+  
+  .contenedor{
+    display: flex;
+    justify-content: center;
+    width:80rem;
+  }
+
+</style>

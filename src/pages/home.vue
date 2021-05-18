@@ -1,14 +1,16 @@
 <template>
   <main v-if="recipes" class="with-recipes">
-    <Card
-      v-for="(recipe, index) in recipes"
-      :key="index"
-      :img-cover="recipe.imgSrc"
-      :img-type="recipe.imgType"
-      :rations="parseInt(recipe.rations)"
-      :cooking-time="parseInt(recipe.cookTime)"
-      :title="recipe.name"
-    />
+    <Link to="/recipe" class="enlace">
+      <Card
+        v-for="(recipe, index) in recipes"
+        :key="index"
+        :img-cover="recipe.imgSrc"
+        :img-type="recipe.imgType"
+        :rations="parseInt(recipe.rations)"
+        :cooking-time="parseInt(recipe.cookTime)"
+        :title="recipe.name"
+      />
+    </Link>
   </main>
   <main v-else class="tw-text-center">
     No haz publicado recetas
@@ -17,9 +19,11 @@
 
 <script>
 import Card from '@/components/Card'
+import Link from '@/components/Link'
+
 
 export default {
-  comoponents: { Card },
+  comoponents: { Card,Link },
   layout: 'home',
   data: () => ({
     recipes: null
