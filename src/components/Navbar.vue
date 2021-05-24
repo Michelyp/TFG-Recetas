@@ -1,18 +1,20 @@
 <template>
   <header>
     <nav>
-      <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
-      <ul>
-        <li>
-          <a href="#"><img src="/icons/heart.svg" alt="Ícono de corazón"></a>
-        </li>
-        <li>
-          <a href="#"><img src="/icons/home.svg" alt="Ícono de casa"></a>
-        </li>
-        <li>
-          <a href="#"><img src="/icons/file.svg" alt="Ícono de archivo"></a>
-        </li>
-      </ul>
+      <div class="info">
+        <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
+        <ul>
+          <li>
+            <a href="#"><img src="/icons/heart.svg" alt="Ícono de corazón"></a>
+          </li>
+          <li>
+            <a href="#"><img src="/icons/home.svg" alt="Ícono de casa"></a>
+          </li>
+          <li>
+            <a href="#"><img src="/icons/file.svg" alt="Ícono de archivo"></a>
+          </li>
+        </ul>
+      </div>
       <div class="buscar">
         <img src="/icons/search.svg" alt="Buscar">
         <input type="search" placeholder="Buscar en Yam Yam">
@@ -24,13 +26,16 @@
 
 <style scoped lang="postcss">
     header {
-        @apply sticky top-0 z-50 grid items-center w-full py-2 mb-12 bg-white border-b border-dark;
+        @apply sticky top-0 z-30 grid items-center w-full py-2 mb-12 bg-white border-b border-dark;
     }
 
     nav {
-        @apply grid items-center px-6 justify-items-center;
-        grid-template-columns: 1fr 2fr 1fr;
-        max-width: 928px;
+        @apply grid items-center w-full max-w-5xl grid-cols-2 px-4 mx-auto justify-items-center;
+    }
+
+    .info {
+        @apply grid gap-6 justify-self-start;
+        grid-template-columns: 40px auto;
     }
 
     .logo {
@@ -39,13 +44,13 @@
     }
 
     .buscar {
-        @apply items-center hidden w-full rounded;
+        @apply items-center hidden w-full max-w-md rounded;
         border: 1px solid #D2CACA;
         background: #FDF8F8;
     }
 
     ul {
-        @apply grid p-0 gap-x-6;
+        @apply grid items-center gap-6 p-0;
         grid-template-columns: repeat(3, 24px);
     }
 
@@ -58,15 +63,13 @@
         justify-self: left;
     }
 
-    @screen md {
+    @screen lg {
         nav {
-            @apply mx-auto;
-            grid-template-columns: 1fr 2fr 2fr 1fr;
+            grid-template-columns: 1fr 2fr 1fr;
         }
 
         .buscar {
             @apply grid px-4 py-1;
-            max-width: 240px;
             grid-template-columns: 20px auto;
         }
 

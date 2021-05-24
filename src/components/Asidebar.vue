@@ -34,10 +34,7 @@
 </template>
 
 <script>
-import Link from '@/components/Link'
-
 export default {
-  components: { Link },
   data: () => ({
     nombre: '',
     apellidos: '',

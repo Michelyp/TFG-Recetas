@@ -23,19 +23,17 @@ module.exports = {
       roboto: ['Roboto', ...fontFamily.mono],
       poppins: ['Poppins', ...fontFamily.sans]
     },
-    colors: {
-      primary: '#6D2A2A',
-      white: '#FFFFFF',
-      gray: '#F4F1F1',
-      dark: '#BEBCBC',
-      black: '#1F2937',
-      transparent: 'transparent'
-    },
-    borderRadius: {
-      default: '12px',
-      full: '50%'
-    },
     extend: {
+      colors: {
+        primary: '#6D2A2A',
+        gray: '#F4F1F1',
+        dark: '#BEBCBC',
+        black: '#1F2937'
+      },
+      borderRadius: {
+        default: '12px',
+        full: '50%'
+      },
       maxWidth: {
         '2xs': '15rem'
       }

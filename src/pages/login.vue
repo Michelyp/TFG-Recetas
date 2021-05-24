@@ -52,6 +52,9 @@ export default {
       value => !!value || 'La contraseña es requerida'
     ]
   }),
+  mounted () {
+    sessionStorage.clear()
+  },
   methods: {
     validate () {
       this.$fire.auth.signInWithEmailAndPassword(this.email, this.password)

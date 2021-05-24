@@ -1,22 +1,12 @@
 <template>
-  <div>
+  <div id="layout_home">
     <Navbar />
-    <Asidebar />
     <Nuxt />
   </div>
 </template>
 
-<script>
-import Navbar from '@/components/Navbar'
-import Asidebar from '@/components/Asidebar'
-
-export default {
-  components: { Navbar, Asidebar }
-}
-</script>
-
 <style scoped lang="postcss">
-    div {
+    #layout_home {
         @apply relative min-h-screen;
         background: #FAFAFA;
     }
