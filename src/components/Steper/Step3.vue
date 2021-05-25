@@ -91,7 +91,6 @@ export default {
       const { imgSrc, imgType, name, description } = JSON.parse(sessionStorage.getItem('DATA_STEP_1'))
       const { rations, category, gastronomy, setUpTime, difficulty, cookTime } = JSON.parse(sessionStorage.getItem('DATA_STEP_2'))
       const RECIPE_ID = JSON.parse(sessionStorage.getItem('RECIPE_ID'))
-      console.log(RECIPE_ID)
       const RECIPE = {
         imgSrc,
         imgType,

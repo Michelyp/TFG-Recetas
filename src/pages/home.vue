@@ -1,11 +1,11 @@
 <template>
   <div class="contenedor">
-    <div v-if="openModal" class="overlay">
+    <v-overlay :value="openModal">
       <div v-click-outside="closeOptions" class="options">
         <span @click="editOption">Editar</span>
         <span @click="deleteOption">Borrar</span>
       </div>
-    </div>
+    </v-overlay>
     <main v-if="recipes" class="with-recipes">
       <Card
         v-for="(recipe, index) in recipes"
@@ -27,6 +27,7 @@ export default {
   data: () => ({
     recipes: null,
     nombre: null,
+    userUID: null,
     username: null,
     openModal: false,
     selectedRecipe: null
@@ -42,6 +43,7 @@ export default {
     const { uid, nombre, username } = JSON.parse(sessionStorage.getItem('user'))
     const snapshot = await this.$fire.firestore.collection('user').doc(uid).collection('recipes').get()
     this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/gatito-serio.png', ...doc.data() }))
+    this.userUID = uid
   },
   methods: {
     openOptions (event) {
@@ -52,7 +54,6 @@ export default {
       this.openModal = false
     },
     editOption () {
-      console.log('Método editar')
       sessionStorage.setItem('RECIPE_ID', JSON.stringify(this.selectedRecipe.id))
       sessionStorage.setItem('DATA_STEP_1', JSON.stringify({
         name: this.selectedRecipe.name,
@@ -76,7 +77,25 @@ export default {
       this.$nuxt.$router.push('/editar-receta')
     },
     deleteOption () {
-      console.log('Método eliminar')
+      this.$fire.firestore.collection('user')
+        .doc(this.userUID)
+        .collection('recipes')
+        .doc(this.selectedRecipe.id)
+        .delete()
+        .then(() => {
+          console.log('Se borró la receta')
+          const { uid, nombre, username } = JSON.parse(sessionStorage.getItem('user'))
+          this.$fire.firestore.collection('user')
+            .doc(uid)
+            .collection('recipes').get()
+            .then((snapshot) => {
+              this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/gatito-serio.png', ...doc.data() }))
+            })
+        })
+        .catch((error) => {
+          console.log('No se borró la receta: ', error)
+        })
+      this.openModal = false
     }
   }
 }
@@ -87,17 +106,12 @@ export default {
         @apply grid max-w-5xl grid-cols-1 px-4 mx-auto;
     }
 
-    .overlay {
-        @apply absolute top-0 left-0 z-40 grid w-screen h-screen place-items-center;
-        background: rgba(0,0,0,0.65);
-    }
-
     .options {
-        @apply grid w-3/4 max-w-md grid-cols-1 text-center bg-white cursor-pointer rounded-xl;
+        @apply grid w-full max-w-md grid-cols-1 text-center bg-white cursor-pointer rounded-xl;
     }
 
     .options span {
-        @apply block py-3 border-b;
+        @apply block py-3 text-black border-b;
         border-color: #DBDBDB;
     }
 

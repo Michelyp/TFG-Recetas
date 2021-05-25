@@ -26,7 +26,7 @@
 
 <style scoped lang="postcss">
     header {
-        @apply sticky top-0 z-30 grid items-center w-full py-2 mb-12 bg-white border-b border-dark;
+        @apply sticky top-0 grid items-center w-full py-2 mb-12 bg-white border-b border-dark;
     }
 
     nav {

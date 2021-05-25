@@ -44,6 +44,10 @@ export default {
   @apply bg-white text-primary;
 }
 
+.v-overlay__content {
+  @apply grid w-screen h-full place-items-center;
+}
+
 @supports (-webkit-text-stroke: 1px black) {
   .re-primary {
     -webkit-text-stroke: 1px rgba(255, 253, 253, 0.5);
