@@ -42,7 +42,7 @@ export default {
   async mounted () {
     const { uid, nombre, username } = JSON.parse(sessionStorage.getItem('user'))
     const snapshot = await this.$fire.firestore.collection('user').doc(uid).collection('recipes').get()
-    this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/gatito-serio.png', ...doc.data() }))
+    this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/default-user.png', ...doc.data() }))
     this.userUID = uid
   },
   methods: {
@@ -89,7 +89,7 @@ export default {
             .doc(uid)
             .collection('recipes').get()
             .then((snapshot) => {
-              this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/gatito-serio.png', ...doc.data() }))
+              this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/default-user.png', ...doc.data() }))
             })
         })
         .catch((error) => {

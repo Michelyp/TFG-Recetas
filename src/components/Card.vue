@@ -14,8 +14,11 @@
     <img
       class="img-preview"
       :src="recipeData.imgSrc ? 'data:image/' + recipeData.imgType + ';base64,' + recipeData.imgSrc : '/images/no-imagen.jpg'"
-      alt="Foto de la receta"
+      alt="Preview de la receta"
     >
+    <Button class="btn-recipe" @click="goToReceta">
+      Ver receta
+    </Button>
   </article>
 </template>
 
@@ -33,7 +36,7 @@ export default {
           description: 'Sin descripción',
           difficulty: 'Sin especificar',
           gastronomy: 'Sin especificar',
-          imgProfile: 'images/gatito-serio.png',
+          imgProfile: 'images/default-user.png',
           ingredients: [],
           completeName: 'Sin nombre',
           rations: null,
@@ -48,6 +51,10 @@ export default {
   methods: {
     toggle () {
       this.$emit('openOptions', this.recipeData)
+    },
+    goToReceta () {
+      sessionStorage.setItem('FULL_RECIPE', JSON.stringify(this.recipeData))
+      this.$nuxt.$router.push(`/receta/${this.recipeData.id}`)
     }
   }
 }
@@ -55,7 +62,7 @@ export default {
 
 <style scoped lang="postcss">
     article {
-        @apply grid w-full grid-cols-1 gap-4 px-6 pt-6 pb-20 mx-auto bg-white rounded-md;
+        @apply grid w-full grid-cols-1 gap-4 px-6 py-6 mx-auto bg-white rounded-md;
         grid-template-rows: repeat(3, fit-content(100%));
         border: 1px solid #DBDBDB;
     }
@@ -84,6 +91,10 @@ export default {
 
     .img-preview {
         max-height: 350px;
+    }
+
+    .btn-recipe {
+        @apply mx-auto text-lg font-semibold border-none shadow-none;
     }
 
     @screen lg {

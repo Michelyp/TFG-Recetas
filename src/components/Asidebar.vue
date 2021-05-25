@@ -1,7 +1,7 @@
 <template>
   <aside>
     <section class="user">
-      <img class="profile-img" src="images/gatito-serio.png" alt="Gatito serio">
+      <img class="profile-img" src="images/default-user.png" alt="Gatito serio">
       <article>
         <div>
           <span class="name">{{ nombre }} {{ apellidos }}</span>

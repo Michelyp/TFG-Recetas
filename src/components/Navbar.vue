@@ -2,16 +2,20 @@
   <header>
     <nav>
       <div class="info">
-        <img class="profile-img" src="/images/gatito-serio.png" alt="Imagen de perfil">
+        <img class="profile-img" src="/images/default-user.png" alt="Imagen de perfil">
         <ul>
           <li>
             <a href="#"><img src="/icons/heart.svg" alt="Ícono de corazón"></a>
           </li>
           <li>
-            <a href="#"><img src="/icons/home.svg" alt="Ícono de casa"></a>
+            <Link to="/home">
+              <img src="/icons/home.svg" alt="Ícono de casa">
+            </Link>
           </li>
           <li>
-            <a href="#"><img src="/icons/file.svg" alt="Ícono de archivo"></a>
+            <Link to="/nueva-receta">
+              <img src="/icons/file.svg" alt="Ícono de archivo">
+            </Link>
           </li>
         </ul>
       </div>
