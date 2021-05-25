@@ -51,9 +51,10 @@ export default {
 
 <style scoped lang="postcss">
     aside {
-        @apply sticky hidden float-right pl-12;
+        @apply sticky hidden pl-12 mt-12;
         max-width: 520px;
-        top: 180px;
+        max-height: 320px;
+        top: 116px;
     }
 
     .user {
@@ -80,6 +81,7 @@ export default {
 
     ul {
         @apply grid gap-y-8 font-poppins;
+        grid-template-columns: fit-content(100%);
         grid-template-rows: repeat(4, minmax(0, fit-content(100%)));
     }
 
@@ -88,7 +90,7 @@ export default {
         grid-template-columns: 24px auto;
     }
 
-     ul li {
+    ul li {
         @apply grid gap-x-4;
         grid-template-columns: 24px auto;
     }

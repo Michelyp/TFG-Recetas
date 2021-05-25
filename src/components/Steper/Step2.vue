@@ -10,21 +10,21 @@
     <div class="specs">
       <div class="spec rations">
         <label for="rations">Número de raciones:</label>
-        <input id="rations" v-model="dataStep2.rationsValue" type="number" placeholder="Número de raciones">
+        <input id="rations" v-model="dataStep2.rations" type="number" placeholder="Número de raciones">
       </div>
 
       <div class="spec setup-time">
         <label for="setup-time">Tiempo de preparación:</label>
-        <input id="setup-time" v-model="dataStep2.setUpTimeValue" type="number" placeholder="Tiempo en minutos">
+        <input id="setup-time" v-model="dataStep2.setUpTime" type="number" placeholder="Tiempo en minutos">
       </div>
 
       <div class="spec category">
         <label for="category">Escoge una categoría:</label>
-        <select id="category" v-model="dataStep2.categoryValue">
+        <select id="category" v-model="dataStep2.category">
           <option value="">
             Selecciona
           </option>
-          <option v-for="(category, index) in categories" :key="index" :value="category">
+          <option v-for="(category, index) in allCategories" :key="index" :value="category">
             {{ category }}
           </option>
         </select>
@@ -32,11 +32,11 @@
 
       <div class="spec difficulty">
         <label for="difficulty">Dificultad:</label>
-        <select id="difficulty" v-model="dataStep2.difficultyValue">
+        <select id="difficulty" v-model="dataStep2.difficulty">
           <option value="">
             Selecciona
           </option>
-          <option v-for="(difficulty, index) in difficulties" :key="index" :value="difficulty">
+          <option v-for="(difficulty, index) in allDifficulties" :key="index" :value="difficulty">
             {{ difficulty }}
           </option>
         </select>
@@ -44,11 +44,11 @@
 
       <div class="spec gastronomy">
         <label for="gastronomy">Gastronomía:</label>
-        <select id="gastronomy" v-model="dataStep2.gastronomyValue">
+        <select id="gastronomy" v-model="dataStep2.gastronomy">
           <option value="">
             Selecciona
           </option>
-          <option v-for="(gastronomy, index) in gastronomies" :key="index" :value="gastronomy">
+          <option v-for="(gastronomy, index) in allGastronomies" :key="index" :value="gastronomy">
             {{ gastronomy }}
           </option>
         </select>
@@ -56,7 +56,7 @@
 
       <div class="spec cook-time">
         <label for="cook-time">Tiempo de cocina:</label>
-        <input id="cook-time" v-model="dataStep2.cookTimeValue" type="number" placeholder="Tiempo en minutos">
+        <input id="cook-time" v-model="dataStep2.cookTime" type="number" placeholder="Tiempo en minutos">
       </div>
 
       <div class="buttons">
@@ -74,16 +74,16 @@
 <script>
 export default {
   data: () => ({
-    categories: ['acompañamientos', 'bebidas', 'ensaladas', 'entrantes', 'postres y desayunos', 'primeros', 'segundos', 'salsas y bases'],
-    difficulties: ['fácil', 'moderado', 'difícil'],
-    gastronomies: ['macrobiótica', 'frugívora', 'naturista', 'vegetariana'],
+    allDifficulties: ['fácil', 'moderado', 'difícil'],
+    allGastronomies: ['macrobiótica', 'frugívora', 'naturista', 'vegetariana'],
+    allCategories: ['acompañamientos', 'bebidas', 'ensaladas', 'entrantes', 'postres y desayunos', 'primeros', 'segundos', 'salsas y bases'],
     dataStep2: {
-      rationsValue: null,
-      categoryValue: '',
-      gastronomyValue: '',
-      setUpTimeValue: null,
-      difficultyValue: '',
-      cookTimeValue: null
+      rations: null,
+      category: '',
+      gastronomy: '',
+      setUpTime: null,
+      difficulty: '',
+      cookTime: null
     }
   }),
   mounted () {
@@ -94,17 +94,17 @@ export default {
   },
   methods: {
     onSubmit () {
-      if (!this.dataStep2.rationsValue) {
+      if (!this.dataStep2.rations) {
         alert('Es necesario el número de raciones')
-      } else if (!this.dataStep2.categoryValue) {
+      } else if (!this.dataStep2.category) {
         alert('Es necesario asignar una categoría')
-      } else if (!this.dataStep2.gastronomyValue) {
+      } else if (!this.dataStep2.gastronomy) {
         alert('Es necesario asignar una gastronomía')
-      } else if (!this.dataStep2.setUpTimeValue) {
+      } else if (!this.dataStep2.setUpTime) {
         alert('Es necesario el tiempo de preparación')
-      } else if (!this.dataStep2.difficultyValue) {
+      } else if (!this.dataStep2.difficulty) {
         alert('Es necesario asignar una dificultad')
-      } else if (!this.dataStep2.cookTimeValue) {
+      } else if (!this.dataStep2.cookTime) {
         alert('Es necesario el tiempo de cocinado')
       } else {
         sessionStorage.setItem('DATA_STEP_2', JSON.stringify(this.dataStep2))
@@ -112,6 +112,7 @@ export default {
       }
     },
     previous () {
+      sessionStorage.setItem('DATA_STEP_2', JSON.stringify(this.dataStep2))
       this.$emit('moveStep', 1)
     }
   }
@@ -120,7 +121,7 @@ export default {
 
 <style scoped lang="postcss">
     section {
-        @apply px-4 py-8 rounded-b;
+        @apply px-4 py-8 rounded-b-xl;
         border: 1px solid #A29595;
         box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.25);
     }
@@ -166,7 +167,7 @@ export default {
 
     .spec input,
     .spec select {
-        @apply px-4 py-2 border border-solid rounded outline-none border-primary;
+        @apply px-4 py-2 border border-solid outline-none rounded-xl border-primary;
     }
 
     .spec input::placeholder {

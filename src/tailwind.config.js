@@ -2,8 +2,8 @@ const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true
+    purgeLayersByDefault: true,
+    removeDeprecatedGapUtilities: true
   },
   prefix: 'tw-',
   purge: ['./**/*.html', './**/*.vue'],
@@ -31,7 +31,6 @@ module.exports = {
         black: '#1F2937'
       },
       borderRadius: {
-        default: '12px',
         full: '50%'
       },
       maxWidth: {

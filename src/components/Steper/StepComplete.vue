@@ -1,8 +1,8 @@
 <template>
   <section>
     <div>
-      <img src="/icons/check.svg" alt="Check">
-      <h2>{{ recipeIsOk ? 'Se ha creado correctamente la receta' : 'Ocurrió un error y no se creó la receta' }}</h2>
+      <img :src="recipeIsOk ? '/icons/check.svg' : '/icons/x.svg'" :alt="recipeIsOk ? 'Good' : 'Bad'">
+      <h2>{{ recipeIsOk ? 'Se completó correctamente' : 'Ocurrió un error' }}</h2>
       <Link to="/home" btn-primary class="text-center">
         Volver al home
       </Link>
@@ -11,10 +11,7 @@
 </template>
 
 <script>
-import Link from '@/components/Link'
-
 export default {
-  components: { Link },
   data: () => ({
     recipeIsOk: JSON.parse(sessionStorage.getItem('savedRecipeIsOk'))
   })

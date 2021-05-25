@@ -54,6 +54,12 @@ export default {
       steps: []
     }
   }),
+  mounted () {
+    const DATA_STEP_3 = JSON.parse(sessionStorage.getItem('DATA_STEP_3'))
+    if (DATA_STEP_3) {
+      this.dataStep3 = DATA_STEP_3
+    }
+  },
   methods: {
     addIngredient () {
       if (this.ingredientValue) {
@@ -77,39 +83,58 @@ export default {
       }
     },
     previous () {
+      sessionStorage.setItem('DATA_STEP_3', JSON.stringify(this.dataStep3))
       this.$emit('moveStep', 2)
     },
     saveRecipe () {
       const { uid } = JSON.parse(sessionStorage.getItem('user'))
-      const { image, imageType, recipeName, recipeDesc } = JSON.parse(sessionStorage.getItem('DATA_STEP_1'))
-      const { rationsValue, categoryValue, gastronomyValue, setUpTimeValue, difficultyValue, cookTimeValue } = JSON.parse(sessionStorage.getItem('DATA_STEP_2'))
-      this.$fire.firestore.collection('user').doc(uid)
-        .collection('recipes').add({
-          imgSrc: image,
-          imgType: imageType,
-          name: recipeName,
-          description: recipeDesc,
-          rations: rationsValue,
-          category: categoryValue,
-          gastronomy: gastronomyValue,
-          setUpTime: setUpTimeValue,
-          difficulty: difficultyValue,
-          cookTime: cookTimeValue,
-          ingredients: this.dataStep3.ingredients,
-          steps: this.dataStep3.steps
-        })
-        .then(() => {
-          sessionStorage.removeItem('DATA_STEP_1')
-          sessionStorage.removeItem('DATA_STEP_2')
-          sessionStorage.setItem('savedRecipeIsOk', JSON.stringify(true))
-          this.$emit('moveStep', 4)
-        })
-        .catch(() => {
-          sessionStorage.removeItem('DATA_STEP_1')
-          sessionStorage.removeItem('DATA_STEP_2')
-          sessionStorage.setItem('savedRecipeIsOk', JSON.stringify(false))
-          this.$emit('moveStep', 4)
-        })
+      const { imgSrc, imgType, name, description } = JSON.parse(sessionStorage.getItem('DATA_STEP_1'))
+      const { rations, category, gastronomy, setUpTime, difficulty, cookTime } = JSON.parse(sessionStorage.getItem('DATA_STEP_2'))
+      const RECIPE_ID = JSON.parse(sessionStorage.getItem('RECIPE_ID'))
+      console.log(RECIPE_ID)
+      const RECIPE = {
+        imgSrc,
+        imgType,
+        name,
+        description,
+        rations,
+        category,
+        gastronomy,
+        setUpTime,
+        difficulty,
+        cookTime,
+        ingredients: this.dataStep3.ingredients,
+        steps: this.dataStep3.steps
+      }
+      const collectionRef = this.$fire.firestore.collection('user').doc(uid).collection('recipes')
+      if (RECIPE_ID) {
+        collectionRef.doc(RECIPE_ID).set(RECIPE)
+          .then(() => {
+            this.moveStep(true)
+          })
+          .catch(() => {
+            this.moveStep(false)
+          })
+      } else {
+        collectionRef.add(RECIPE)
+          .then(() => {
+            this.moveStep(true)
+          })
+          .catch(() => {
+            this.moveStep(false)
+          })
+      }
+    },
+    moveStep (isOk) {
+      this.cleanSteps()
+      sessionStorage.setItem('savedRecipeIsOk', JSON.stringify(isOk))
+      this.$emit('moveStep', 4)
+    },
+    cleanSteps () {
+      sessionStorage.removeItem('RECIPE_ID')
+      sessionStorage.removeItem('DATA_STEP_1')
+      sessionStorage.removeItem('DATA_STEP_2')
+      sessionStorage.removeItem('DATA_STEP_3')
     }
   }
 }
@@ -189,7 +214,7 @@ export default {
         }
 
         .ingredients {
-            grid-template-rows: repeat(2, fit-content(100%));
+            grid-auto-rows: fit-content(100%);
         }
 
         .steps-builder {

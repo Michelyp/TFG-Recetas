@@ -44,7 +44,7 @@
     }
 
     .buscar {
-        @apply items-center hidden w-full max-w-md rounded;
+        @apply items-center hidden w-full max-w-md rounded-xl;
         border: 1px solid #D2CACA;
         background: #FDF8F8;
     }

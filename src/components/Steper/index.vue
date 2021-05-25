@@ -48,7 +48,7 @@ export default {
     }
 
     .header {
-        @apply grid px-6 rounded-t gap-x-4;
+        @apply grid px-6 gap-x-4 rounded-t-xl;
         grid-template-columns: 50px 1fr;
         border: 1px solid #A29595;
         box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.25);

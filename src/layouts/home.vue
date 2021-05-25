@@ -5,7 +5,11 @@
   </div>
 </template>
 
-<style scoped lang="postcss">
+<style lang="postcss">
+    body {
+        @apply relative;
+    }
+
     #layout_home {
         @apply relative min-h-screen;
         background: #FAFAFA;

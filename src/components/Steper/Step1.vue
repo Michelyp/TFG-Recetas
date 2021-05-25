@@ -15,22 +15,22 @@
       </div>
 
       <div class="upload" @click="clickInputFile">
-        <img :src="!dataStep1.image ? '/icons/upload.svg' : '/icons/check.svg'" alt="Upload icon">
-        <span>{{ dataStep1.imageName ? dataStep1.imageName : 'Selecciona una imagen' }}</span>
+        <img :src="!dataStep1.imgSrc ? '/icons/upload.svg' : '/icons/check.svg'" alt="Upload icon">
+        <span>{{ dataStep1.imgName ? dataStep1.imgName : 'Selecciona una imagen' }}</span>
         <input ref="fileInput" type="file" accept="image/*" @change="onFilePicked($event)">
       </div>
     </div>
 
     <div class="right">
-      <input v-model="dataStep1.recipeName" type="text" placeholder="Nombre de la receta">
+      <input v-model="dataStep1.name" type="text" placeholder="Nombre de la receta">
 
-      <textarea v-model="dataStep1.recipeDesc" placeholder="Descripción" />
+      <textarea v-model="dataStep1.description" placeholder="Descripción" />
 
       <div class="buttons">
         <Button primary @click="onSubmit">
           Continuar
         </Button>
-        <Button>
+        <Button @click="cancel">
           Cancelar
         </Button>
       </div>
@@ -42,11 +42,11 @@
 export default {
   data: () => ({
     dataStep1: {
-      image: null,
-      imageName: null,
-      imageType: '',
-      recipeName: '',
-      recipeDesc: ''
+      name: '',
+      imgSrc: null,
+      imgName: null,
+      imgType: '',
+      description: ''
     }
   }),
   mounted () {
@@ -69,27 +69,33 @@ export default {
         const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.onload = () => {
-          this.dataStep1.image = reader.result.toString().split(',')[1]
-          this.dataStep1.imageName = file.name
-          this.dataStep1.imageType = fileType
+          this.dataStep1.imgSrc = reader.result.toString().split(',')[1]
+          this.dataStep1.imgName = file.name
+          this.dataStep1.imgType = fileType
         }
       } else {
-        this.dataStep1.image = null
-        this.dataStep1.imageName = null
+        this.dataStep1.imgSrc = null
+        this.dataStep1.imgName = null
         alert('Solo se permiten imágenes')
       }
     },
     onSubmit () {
-      if (!this.dataStep1.image) {
+      if (!this.dataStep1.imgSrc) {
         alert('Es necesaria una imagen')
-      } else if (!this.dataStep1.recipeName) {
+      } else if (!this.dataStep1.name) {
         alert('Es necesario un nombre para la receta')
-      } else if (!this.dataStep1.recipeDesc) {
+      } else if (!this.dataStep1.description) {
         alert('Es necesario una descripción para la receta')
       } else {
         sessionStorage.setItem('DATA_STEP_1', JSON.stringify(this.dataStep1))
         this.$emit('moveStep', 2)
       }
+    },
+    cancel () {
+      sessionStorage.removeItem('DATA_STEP_1')
+      sessionStorage.removeItem('DATA_STEP_2')
+      sessionStorage.removeItem('DATA_STEP_3')
+      this.$nuxt.$router.push('/home')
     }
   }
 }

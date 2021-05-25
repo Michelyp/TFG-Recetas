@@ -10,11 +10,7 @@
       <Card
         v-for="(recipe, index) in recipes"
         :key="index"
-        :name="nombre"
-        :username="username"
-        :description="recipe.description"
-        :img-recipe="recipe.imgSrc"
-        :img-type="recipe.imgType"
+        :recipe-data="recipe"
         @openOptions="openOptions"
       />
     </main>
@@ -32,7 +28,8 @@ export default {
     recipes: null,
     nombre: null,
     username: null,
-    openModal: false
+    openModal: false,
+    selectedRecipe: null
   }),
   head () {
     return {
@@ -44,19 +41,39 @@ export default {
   async mounted () {
     const { uid, nombre, username } = JSON.parse(sessionStorage.getItem('user'))
     const snapshot = await this.$fire.firestore.collection('user').doc(uid).collection('recipes').get()
-    this.recipes = snapshot.docs.map(doc => doc.data())
-    this.nombre = nombre
-    this.username = username
+    this.recipes = snapshot.docs.map(doc => ({ id: doc.id, completeName: nombre, username, imgProfile: 'images/gatito-serio.png', ...doc.data() }))
   },
   methods: {
-    openOptions () {
+    openOptions (event) {
       this.openModal = true
+      this.selectedRecipe = event
     },
     closeOptions () {
       this.openModal = false
     },
     editOption () {
       console.log('Método editar')
+      sessionStorage.setItem('RECIPE_ID', JSON.stringify(this.selectedRecipe.id))
+      sessionStorage.setItem('DATA_STEP_1', JSON.stringify({
+        name: this.selectedRecipe.name,
+        imgSrc: this.selectedRecipe.imgSrc,
+        imgName: this.selectedRecipe.imgName,
+        imgType: this.selectedRecipe.imgType,
+        description: this.selectedRecipe.description
+      }))
+      sessionStorage.setItem('DATA_STEP_2', JSON.stringify({
+        rations: this.selectedRecipe.rations,
+        category: this.selectedRecipe.category,
+        gastronomy: this.selectedRecipe.gastronomy,
+        setUpTime: this.selectedRecipe.setUpTime,
+        difficulty: this.selectedRecipe.difficulty,
+        cookTime: this.selectedRecipe.cookTime
+      }))
+      sessionStorage.setItem('DATA_STEP_3', JSON.stringify({
+        ingredients: this.selectedRecipe.ingredients,
+        steps: this.selectedRecipe.steps
+      }))
+      this.$nuxt.$router.push('/editar-receta')
     },
     deleteOption () {
       console.log('Método eliminar')
@@ -76,7 +93,7 @@ export default {
     }
 
     .options {
-        @apply grid w-3/4 max-w-md grid-cols-1 text-center bg-white rounded cursor-pointer;
+        @apply grid w-3/4 max-w-md grid-cols-1 text-center bg-white cursor-pointer rounded-xl;
     }
 
     .options span {

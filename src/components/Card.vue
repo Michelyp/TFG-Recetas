@@ -2,44 +2,52 @@
   <article>
     <header>
       <div class="info">
-        <img class="img-profile" :src="imgProfile" :alt="name">
-        <span class="name">{{ name }}</span>
-        <span class="username">@{{ username }}</span>
+        <img class="img-profile" :src="recipeData.imgProfile" :alt="recipeData.username">
+        <span class="name">{{ recipeData.completeName }}</span>
+        <span class="username">@{{ recipeData.username }}</span>
       </div>
       <img class="tw-cursor-pointer" src="icons/ellipsis.svg" alt="Opciones" @click="toggle">
     </header>
     <p>
-      {{ description }}
+      {{ recipeData.description }}
     </p>
-    <img :src="imgRecipe ? 'data:image/' + imgType + ';base64,' + imgRecipe : '/images/no-imagen.jpg'" alt="Foto de la receta">
+    <img
+      class="img-preview"
+      :src="recipeData.imgSrc ? 'data:image/' + recipeData.imgType + ';base64,' + recipeData.imgSrc : '/images/no-imagen.jpg'"
+      alt="Foto de la receta"
+    >
   </article>
 </template>
 
 <script>
 export default {
   props: {
-    imgProfile: {
-      type: String,
-      default: 'images/gatito-serio.png'
-    },
-    name: {
-      type: String,
-      default: 'Sin usuario'
-    },
-    username: {
-      type: String,
-      default: 'sinusuario'
-    },
-    description: {
-      type: String,
-      default: 'Sin descripción'
-    },
-    imgRecipe: String,
-    imgType: String
+    recipeData: {
+      type: Object,
+      default () {
+        return {
+          id: String,
+          category: 'Sin categoría',
+          cookTime: null,
+          name: 'Sin nombre',
+          description: 'Sin descripción',
+          difficulty: 'Sin especificar',
+          gastronomy: 'Sin especificar',
+          imgProfile: 'images/gatito-serio.png',
+          ingredients: [],
+          completeName: 'Sin nombre',
+          rations: null,
+          setUpTime: null,
+          steps: [],
+          imgSrc: String,
+          imgType: String
+        }
+      }
+    }
   },
   methods: {
     toggle () {
-      this.$emit('openOptions', 'SE CLICKEÓ EN OPCIONES')
+      this.$emit('openOptions', this.recipeData)
     }
   }
 }
@@ -72,6 +80,10 @@ export default {
 
     p {
         @apply leading-tight;
+    }
+
+    .img-preview {
+        max-height: 350px;
     }
 
     @screen lg {
