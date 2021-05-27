@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  /* Declara las propiedades */
   props: {
     recipeData: {
       type: Object,
@@ -52,6 +53,7 @@ export default {
     toggle () {
       this.$emit('openOptions', this.recipeData)
     },
+    /* Guarda la información de la receta en sessionStorage y redirige a la ruta de la receta */
     goToReceta () {
       sessionStorage.setItem('FULL_RECIPE', JSON.stringify(this.recipeData))
       this.$nuxt.$router.push(`/receta/${this.recipeData.id}`)

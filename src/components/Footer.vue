@@ -13,6 +13,7 @@ export default {
       year: null
     }
   },
+  /* Obtiene el año actual */
   mounted () {
     this.$nextTick(function () {
       this.year = new Date().getFullYear()

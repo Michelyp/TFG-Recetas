@@ -40,6 +40,7 @@ export default {
     apellidos: '',
     username: ''
   }),
+  /* Obtiene la información básica del usuario cuando el componente es montado en el DOM */
   mounted () {
     const { nombre, apellidos, username } = JSON.parse(sessionStorage.getItem('user'))
     this.nombre = nombre

@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  /* Declara las propiedades */
   props: {
     primary: Boolean,
     secondary: Boolean

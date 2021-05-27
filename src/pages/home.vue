@@ -39,6 +39,7 @@ export default {
       }
     }
   },
+  /* Obtiene los datos del usuario y con el UID obtiene las recetas */
   async mounted () {
     const { uid, nombre, username } = JSON.parse(sessionStorage.getItem('user'))
     const snapshot = await this.$fire.firestore.collection('user').doc(uid).collection('recipes').get()
@@ -53,6 +54,7 @@ export default {
     closeOptions () {
       this.openModal = false
     },
+    /* Guarda la receta en partes para que sean obtenidos por la vista de 'editar-receta' */
     editOption () {
       sessionStorage.setItem('RECIPE_ID', JSON.stringify(this.selectedRecipe.id))
       sessionStorage.setItem('DATA_STEP_1', JSON.stringify({
@@ -76,6 +78,7 @@ export default {
       }))
       this.$nuxt.$router.push('/editar-receta')
     },
+    /* Eliminar la receta seleccionada */
     deleteOption () {
       this.$fire.firestore.collection('user')
         .doc(this.userUID)
